@@ -1,0 +1,229 @@
+
+
+	************************************************************************** SPRING *************************************************************************
+	-----------------------------------------------------------------------------------------------------------------------------------------------------------
+	
+	
+	*** IOC 					: Spring controls object creation 
+	*** IOC CONTAINER 	 	: engine” that implements IoC
+	*** ApplicationContext 	: actual implementation of the IoC container
+	*** DI(Dependency Injection) : DI is a design pattern (a way to implement IoC).
+			-> EXPLANATION : 
+				
+				
+				1: IoC (Inversion of Control)
+
+						Principle: You don’t create objects; something else does it for you.
+
+						Analogy:
+							*	You want coffee.
+
+							*	Without IoC: You go to the kitchen, grind beans, boil water, brew coffee yourself.
+
+							*	With IoC: You ask the café (Spring), and they serve coffee ready to drink.
+							
+			
+			
+				2: IoC Container
+
+						Definition: The “engine” that implements IoC.
+
+						Analogy:
+
+							*	IoC Container = the café staff and machines that:
+
+							*	Make the coffee (create the bean)
+
+							*	Add sugar/milk if requested (inject dependencies)
+
+							*	Clean the cup afterward (bean lifecycle management)
+							
+				3: ApplicationContext
+
+						Definition: The actual “smart café” in Spring.
+
+							* It is an implementation of IoC Container.
+
+						Adds extra features:
+
+							*	Knows recipes (annotations like @Component)
+
+							*	Can manage events (like sending a notification when coffee is ready)
+
+							*	Handles lifecycle (@PostConstruct / @PreDestroy)
+
+							*	Supports internationalization, AOP, etc.
+
+								In Spring Boot:
+
+										-> When you run SpringApplication.run(...), Spring Boot creates an ApplicationContext automatically.
+
+										-> All your beans (@Component, @Service, @Repository) are registered and managed inside it.
+										
+										
+										
+										
+	*** @PostConstruct : it will execute when the Spring Bean created after all Depedice injected
+	*** @PreDestroy    : it is a method which is execute just before the Server OFF or by any customs to remove this Bean.
+	
+	
+	
+	
+	*** Spring Managed Bean Life Cycle : 
+			
+				1.Bean Creation (Constructor)
+					   │
+					   ▼
+				2.Dependency Injection
+					   │
+					   ▼
+				3.ApplicationContextAware(Regitsred at Spring Container)
+					   │
+					   ▼
+				4.@PostConstruct / afterPropertiesSet() / init-method
+					   │
+					   ▼
+				5.Bean Ready to Use
+					   │
+					   ▼
+				6.@PreDestroy / destroy() / destroy-method
+					   │
+					   ▼
+				7.Bean Destroyed (Removed from Container)
+
+
+	*** IOC Vs DI : 
+			IOC : IoC is a design principle where the control of object creation and dependency management is transferred from the application code to a container
+			
+			DI  : DI is a design pattern (a way to implement IoC).
+			
+			
+			
+			
+			
+	*** Spring Bean Scope : 
+			-> Bean scope defines how long a bean lives and how many instances of it exist in the Spring Context,
+			-> In other words, scope = lifecycle + visibility of a bean.
+			-> By default, Spring beans are singleton.
+			
+			we several bean scopes are there, they are,
+					1.singleton (it will create only one instance for bean in spring context)
+					2.prototype (it creates new instance for every request, this is not fully spring managed like @Predestory will not calls)
+					3.Request (One bean instance per HTTP request.)
+					4.Session (One bean instance per HTTP session.)
+					
+					
+					
+					
+					
+					
+	*** @Controller(), @RestController(), @Service(), @Component(), @Respository() this all annotations are having same functionalaty that	
+						- All are detected by component scanning
+						- Mark a class as Spring bean and Tell Spring to put the object in the ApplicationContext.
+						
+						
+	
+	*** @Autowired(required = true) this indicates that if there is no bean found with type it will throw an exception.
+				or 
+		@Autowired(required = false) this indicates that if there is no bean found with type it will stay null, not throw any exception.
+		
+		
+	----------------------------------------------	
+	*** @Autowired() Vs @Inject() Vs @Resource() :
+	----------------------------------------------
+				@Autowired : 
+						- it will inject a Object with type
+						- if no bean with give type default it will throw an exception(has required attribute with default "true")
+				
+				
+				@Inject :
+						- it will inject a Object with type.
+						- no Exception if given type of bean not found (no required attribut)
+						
+						
+				@Autowired : 
+						- first it will try to inject Object with Name, if not found with name it will try to inject with type 
+						- it will throw an exception if bean not foun with name/type (no required attrubite)
+						
+						
+						
+	
+	
+	--------------------------------------------------------------------------
+	>>>>>>>>>>>>>> BEAN FACTORY Vs APPLICATIONCONTEXT<<<<<<<<<<<<<<<<<<<<<<<<<
+	--------------------------------------------------------------------------
+	*** Bean Factory : 
+			-> BeanFactory is the basic Spring IoC container.
+			-> Responsible for Creating Bean and Managing dependencies
+			-> Lazy loading: beans are created only when requested (getBean()).
+			-> Lightweight, minimal functionality.
+			
+	*** ApplicationContext :
+			-> ApplicationContext is an advanced Spring container built on top of BeanFactory.
+			-> Provides everything BeanFactory does, plus:
+						* AOP integration
+						* Bean LifeCycle management
+						* Eager loading: singleton beans are created at startup
+
+
+
+
+	------------------------------------------------------------
+	*** How To Run Spring boot application at IDE Vs CLI Vs .jar
+	------------------------------------------------------------
+			IDE : This is Use for Developing/Testing, here, By Click on RUN at main Method of application
+			
+			JAR : to generate/convert a JAR from maven/gradle with emmeded server, by CMD we can run our application
+			
+			Spring Boot CLI : this is run by groove script , install Spring boot CLI and run that groove script.
+			
+			
+			
+	
+	---------------------------------------------------------------------
+	*** How do you externalize configuration for different environments?
+	---------------------------------------------------------------------
+	
+			-> By using Profiles we can able to specify that Properties with different Env without hard coding like, if we have DEV, TEST, PROD env,
+				so, here i need to use different properties for each ENV, so that i'll create 3 profiles with "application-dev.properties",
+				"application-test.properties" and "application-prd.properties"
+			-> here we have one more "application.properties" we have that common specification.
+			-> in this application.properties we place a property that "spring.profiles.active=dev"
+			-> now here "spring.profiles.active=dev" indicate that it will use this configurations, if i need Test or Prd just i need to change here that value.
+			
+			
+			
+			application.properties[spring.profiles.active=dev]
+						-> application-dev.properties [ active ]
+						-> application-test.properties
+						-> application-prod.properties
+						
+						
+	
+	
+	
+	
+	
+	--------------------------------------------
+	***   @Value  Vs  @ConfigurationProperties :
+	--------------------------------------------
+				
+			->	@Value(): This annotation will used for inject a single Property value to the field
+				syntax : 
+					EX :
+						@Value("${spring.datasource.url}")
+						private String url;
+						
+						
+			->  @ConfigurationProperties() : This annotation will use to inject/bing a group of properties to a class like below
+				EX :
+						@Component
+						@ConfigurationProperties(prefix = "spring.datasource")
+						class dataSource{
+								private String url;
+								privare String username;
+								private String password;
+						}
+						
+						
+

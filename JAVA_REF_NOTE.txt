@@ -1,0 +1,445 @@
+	
+	***  HOW A JAVA CODE RUNS :
+	
+			-> JDK = JRE + compiler + tools
+					 JRE = JVM + LIBIRES
+			
+			
+			STEP -1 : Write the Code
+					 -> You write a Java program and save it as YourProgram.java.
+					 
+					 
+			STEP -2 : Compile the Code
+					 -> Compiler: javac (part of JDK), it converts the actual code to bytes code
+					 -> What happens:
+							* Checks syntax.
+							* Converts your .java code into bytecode .class file.
+	
+			STEP -3 : Run the Program
+					  -> JRE contains JVM which is used to read Bytecode (.class) and execute.
+					  -> JVM Load all classes and search main method, execute it and Output. 
+					
+					
+					
+	
+	* PREIMITIVE DATA TYPES : store actual numeric values directly.
+			int, long, boolean, double, etc
+			
+			
+			
+	* WRAPPER DATA TYPES : this are Reference type, means , these all are class, store vaiue in object ref type
+			Integer, Long, Boolean, Double, Float, etc
+
+	
+	
+	* LITERAL : A literal is the actual value you write directly in your code.
+				(Think of Variable = Jarand Literal = Content inside jar)
+				
+			EX : int a = 100;          // 100 → integer literal
+				 double pi = 3.14;     // 3.14 → floating-point literal
+				 char ch = 'A';        // 'A' → character literal
+				 String name = "Ram";  // "Ram" → string literal
+				 boolean flag = true;  // true → boolean literal
+				 
+			
+			
+	* What is Main Method in java, what else if no main method..?
+		ANS : 
+			->  It is the entry point of a Java program.
+			->	JVM looks for this method to start execution.
+			->	Without it, JVM doesn’t know where to begin
+	
+	
+	* EXCEPTION / RUNTIMEEXCEPTION is Classes or Interface...?
+	
+					-> RUNTIMEEXCEPTION is Class
+					-> EXCEPTION is also class
+	
+	
+	* What is "static void" for main method, shall i write like "void static"..?
+			-> static → JVM calls main() without creating an object of the class.
+			-> void → main doesn’t return anything to JVM.
+			
+			No, we can't write like void static, because of java expecet Modifier in specific order.
+		
+		
+		
+
+	* can i place "final" to main method..?
+	
+			-> Yes, You can write, final means cannot overridden.
+			(public static final void main(String[] args))
+			-> But JVM doesn’t care about final here, it just looks for a method with exact signature "public static void main(String[])".
+	
+	
+	
+	* what is String[] args in main method..?
+				-> It is an array of Strings.
+				-> It is used to receive input values from the command line when you run a Java program.
+	
+	
+	
+	* can i overload main method...?
+			-> Yes, we can overload, but we can't override the main method.
+
+
+
+
+	* TYPES OF INPUT TAKEN METHODS : 
+				1. Scanner I = new Scanner(System.in);
+				2.BufferReader I = new BufferReader(new nputStreamReader(System.in))      [ fatser ]
+				
+				
+	
+	* instanceof():
+	
+			String Name = "Jai";
+			boolean isString = Name instanceof String ;
+			
+			
+			
+			
+	*   STATIC :                                                                                     
+			| ----------------------- | ----------------------------------------------------------------------------------------------- |
+			| **Static variable**     | Shared by all objects of the class. Only **one copy exists** in memory.                         |
+			| **Static method**       | Can be called without creating an object. Cannot access non-static (instance) members directly. |
+			| **Static block**        | Runs **once** when the class is loaded, used for class-level initialization.                    |
+			| **Static nested class** | Nested class that **doesn’t require an instance** of outer class.                               |
+			| **Memory location**     | Stored in **method area** (class-level memory).                                                 |
+			| **Use case**            | Utility methods, constants, class counters, shared resources.                                   |
+			 -------------------------   -----------------------------------------------------------------------------------------------
+			 
+			 
+			 
+			 
+	*   DATA STRUCTERS CONVERSIONS :
+	
+			-----------------------------------------------------------------
+			| From  | To    | Method                                        |
+			| ----- | ----- | --------------------------------------------- |
+			| List  | Array | `list.toArray(new T[0])`                      |
+			| Array | List  | `Arrays.asList(arr)` / `new ArrayList<>(...)` |
+			| List  | Set   | `new HashSet<>(list)`                         |
+			| Set   | List  | `new ArrayList<>(set)`                        |
+			| Array | Set   | `new HashSet<>(Arrays.asList(arr))`           |
+			| Set   | Array | `set.toArray(new T[0])`                       |
+			-----------------------------------------------------------------
+			 
+			 
+			 
+			 
+	*   FINAL :
+			
+			| ---------------------- | ------------------------------------------------------------------------------------ |
+			| **Final variable**     | Value cannot be changed once assigned. Must be initialized.                          |
+			| **Final method**       | Cannot be overridden by subclasses.                                                  |
+			| **Final class**        | Cannot be inherited.                                                                 |
+			| **Final with objects** | Reference cannot change, but object content can change (unless object is immutable). |
+			 -----------------------   ------------------------------------------------------------------------------------
+
+
+
+	1.  Primitive Data Types
+			* These are the basic, built-in types in Java.
+			* They are not objects → they store actual values directly in memory.
+			* They are faster and use less memory.
+			* They always have a default value.
+			EX : int, boolean, short, long, double, char, float
+	
+	
+	
+	
+	2.  Non-Primitive Data Types (Reference Types)
+			* These are not built-in (except String which is special).
+			* They are created by programmers or provided by Java libraries.
+			* They store a reference (memory address), not the actual value.
+			* They can have methods and properties.
+			* Their default value is always null (if not initialized).
+			EX : String, Arrays, Class, Onject, interface
+	
+	
+	
+	
+	
+	3.  String (Immutable)  ;  StringBuilder (Mutable, Not Thread-Safe)  ;   StringBuffer (Mutable, Thread-Safe)
+	
+	
+	
+	
+	
+	4.  A functional interface is an interface with exactly one abstract method (SAM → Single Abstract Method).
+			It can still have:
+					* Default methods (with implementation)
+					* Static methods
+					* But only one abstract method.
+	
+	
+	
+	
+	5.  A thread is the smallest unit of execution inside a process.
+	
+	
+
+	
+	6.	Modifier	Same Class	Same Package	Subclass (diff pkg)		Other Packages
+		---------	----------	-----------		-------------------		--------------
+		public	 		✅	 		✅	  			✅						✅
+		protected		✅			✅				✅						❌
+		default			✅			✅				❌						❌
+		private			✅			❌				❌						❌
+		
+		
+
+		
+	7.  Composition (Strong HAS-A)
+				* A strong form of HAS-A.
+				* The contained object cannot exist without the container.
+				* Lifecycle of contained object depends on the container.
+				👉 Example:
+					A House HAS-A Room → if the house is destroyed, the rooms don’t exist anymore.
+		
+		Aggregation (Weak HAS-A)
+				A weaker form of HAS-A.
+				The contained object can exist independently of the container.
+				Lifecycle of contained object is not tied to the container.
+				👉 Example:
+					A Teacher HAS-A Student → even if the teacher leaves, the student can still exist.
+					
+	
+
+	
+	8.  IS-A Relation : Class_A extend Class_B (Class_B IS-A Class_A)
+	
+	
+	
+	9.  HAS-A Relation : class_A contains another class this called as HAS-A Relation.
+	
+	
+	
+	10. How to pass/send Value from baseclass/subclass to parent classs by using "super()"
+	
+	
+	
+	11. can we override static methods in inheritance
+	
+	
+	12. Collections
+			* List
+				- ArrayList
+				- LinkedList
+			
+			* Set
+				- HashSet(No order, Allow Null)
+				- LinkedSet ( Insert Order, Allow null)
+				- TreeSet ( Sort Order, not allow null)
+			
+			* Queue
+		
+		
+		
+	13. Map( it is not a part of collections)
+			- HashMap
+			- LinkedList
+			- TreeList
+			
+	
+	
+	14. @SpringBootApplication = 
+								@Configuration(Marks the class as a source of bean definitions.) +
+								@EnableAutoConfiguration +
+								@ComponentScan(Tells Spring to scan for @Component, @Service, @Repository, and @Controller in the current package and subpackages.)
+								
+					
+
+					
+	15. Types of DI:
+			* Constructor
+			* Setter Injection
+			* Field Injection( not reccomended)
+			* @Bean + @Configuration (by using this we can also inject)
+			
+	
+	
+	16. @PostConstruct & @PreDestroy : 
+	
+	
+	
+	
+	17. SPRING MVC PROJECT STRUCTUER : 
+				MySpringMVCApp/
+					│
+					├─ src/main/java/com/example/controller/HelloController.java
+					├─ src/main/webapp/WEB-INF/
+					│   ├─ web.xml
+					│   ├─ dispatcher-servlet.xml
+					│   └─ views/hello.jsp
+					└─ pom.xml (if Maven) or build.gradle
+					
+					
+					
+					----------
+					Web.xml:-
+					----------
+						<web-app>
+							<!-- Register DispatcherServlet -->
+							<servlet>
+								<servlet-name>dispatcher</servlet-name>
+								<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+								<load-on-startup>1</load-on-startup>
+							</servlet>
+
+							<!-- Map all requests to DispatcherServlet -->
+							<servlet-mapping>
+								<servlet-name>dispatcher</servlet-name>
+								<url-pattern>/</url-pattern>
+							</servlet-mapping>
+						</web-app>
+
+
+
+					------------------------
+					dispatcher-servlet.xml :-
+					------------------------
+						<beans xmlns="http://www.springframework.org/schema/beans"
+							   xmlns:context="http://www.springframework.org/schema/context"
+							   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+							   xsi:schemaLocation="
+								   http://www.springframework.org/schema/beans 
+								   http://www.springframework.org/schema/beans/spring-beans.xsd
+								   http://www.springframework.org/schema/context 
+								   http://www.springframework.org/schema/context/spring-context.xsd">
+
+							<!-- Scan controller package -->
+							<context:component-scan base-package="com.example.controller" />
+
+							<!-- View resolver -->
+							<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+								<property name="prefix" value="/WEB-INF/views/" />
+								<property name="suffix" value=".jsp" />
+							</bean>
+
+						</beans>
+				
+		
+
+		
+		---------------------		
+		Summary of the flow:-
+		---------------------
+		
+				-> Request → hits DispatcherServlet (defined in web.xml).
+
+				-> DispatcherServlet → reads its config (dispatcher-servlet.xml).
+
+				-> Loads all beans → controllers, services, view resolvers.
+
+				-> DispatcherServlet → finds the correct controller method for the request.
+
+				-> Controller → executes → returns view name.
+
+				-> ViewResolver → finds the JSP/HTML → renders response.
+				
+				
+				
+				
+				
+				
+	18. Idempotent = “Safe to repeat”
+	
+	
+	
+	19. ERROR : Caused by JVM or system, generally not handled
+		EXCEPTION : Caused by the program, can be handled
+	
+	
+	
+	20. Throwable :
+	
+			* Error(Caused by JVM or system, generally not handled):
+			
+			* Exceptions(Caused by the program, can be handled):
+			
+					- Checked Exceptions(compile Time)
+					- Unchecked Exception(Run time)
+					
+					
+	21. STREAM :
+			In Java, a Stream is a sequence of elements that supports functional-style operations to process data declaratively.
+			It was introduced in Java 8 as part of the Java Stream API.
+
+
+	22. Reserved Key words in JAVA : 53
+	
+	23. OPTIONAL : The Optional class from the java.util package is designed to be used as a return type for methods that may or may not return a value.
+	
+	
+	24. Absolute path and Relative path :
+				* Absolute path → complete fixed location.(C:\Users\Sudharshan\file.txt)
+				* Relative path → depends on current directory where your program runs.(\file.txt)
+
+	25. Ternary Operation : condition ? expressionIfTrue : expressionIfFalse;
+							EX : String N = 2 > 20 ? "BIG" : "SMALL"
+							
+							
+							
+	26. STREAM :-
+	
+			--------------------------
+			INTERMIDIATE OPERATIONS :
+			--------------------------------------------------------------------------------------------------------------------------------------
+			| Operation                                  | Description                                 | Example                                 |
+			| ------------------------------------------ | ------------------------------------------- | --------------------------------------- |
+			| `map()`                                    | Transforms each element                     | `stream.map(s -> s.toUpperCase())`      |
+			| `filter()`                                 | Keeps only elements matching condition      | `stream.filter(s -> s.length() > 3)`    |
+			| `distinct()`                               | Removes duplicates (based on `equals()`)    | `stream.distinct()`                     |
+			| `sorted()`                                 | Sorts elements (natural or comparator)      | `stream.sorted()`                       |
+			| `peek()`                                   | Performs action on each element (debugging) | `stream.peek(System.out::println)`      |
+			| `limit(n)`                                 | Keeps first `n` elements                    | `stream.limit(5)`                       |
+			| `skip(n)`                                  | Skips first `n` elements                    | `stream.skip(3)`                        |
+			| `flatMap()`                                | Flattens nested streams                     | `stream.flatMap(list -> list.stream())` |
+			| `mapToInt() / mapToLong() / mapToDouble()` | Maps objects to primitive streams           | `stream.mapToInt(String::length)`       |
+			--------------------------------------------------------------------------------------------------------------------------------------
+			
+			---------------------
+			TERMINAL OPERATIONS :
+			--------------------------------------------------------------------------------------------------------------------
+			| Operation     | Description                                           | Example                                   |
+			| ------------- | ----------------------------------------------------- | ----------------------------------------- |
+			| `forEach()`   | Performs action on each element                       | `stream.forEach(System.out::println)`     |
+			| `collect()`   | Collects results into a collection or value           | `stream.collect(Collectors.toList())`     |
+			| `reduce()`    | Reduces stream to a single value (sum, product, etc.) | `stream.reduce(0, Integer::sum)`          |
+			| `count()`     | Returns number of elements                            | `stream.count()`                          |
+			| `min()`       | Finds minimum element                                 | `stream.min(Comparator.naturalOrder())`   |
+			| `max()`       | Finds maximum element                                 | `stream.max(Comparator.naturalOrder())`   |
+			| `anyMatch()`  | Returns true if any element matches                   | `stream.anyMatch(s -> s.startsWith("A"))` |
+			| `allMatch()`  | Returns true if all elements match                    | `stream.allMatch(s -> s.length() > 2)`    |
+			| `noneMatch()` | Returns true if no element matches                    | `stream.noneMatch(s -> s.isEmpty())`      |
+			| `findFirst()` | Returns first element (Optional)                      | `stream.findFirst()`                      |
+			| `findAny()`   | Returns any element (Optional)                        | `stream.findAny()`                        |
+			| `toArray()`   | Collects elements into an array                       | `stream.toArray()`                        |
+			---------------------------------------------------------------------------------------------------------------------
+			
+	
+	
+	27. SPRING MVC vs SPRING BOOT:
+		-------------------------
+				* Auto-configuration: 
+
+						- Automatically configures Spring beans based on the dependencies in your project.
+
+						- You don’t have to manually write XML or Java config for most things.
+
+				* Embedded server: 
+
+						- Comes with Tomcat (default) or Jetty/Undertow.
+
+						- No need for manual server setup or external deployment.
+
+						- Just run your main() method → app runs on localhost:8080 by default.
+			
+	28. @pathvarable() Vs @RequestParam():
+			-> @PATHVARABLE() : Used To extract from URL
+			-> @RequestParam() : Used To Extract From Query Parameters(which are bind with URL while sending request, but not view in URL)
+			
+			
+			

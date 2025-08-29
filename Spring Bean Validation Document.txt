@@ -1,0 +1,134 @@
+
+
+	************************************************************ JAVA BEAN VALIDATIONS @Valid ********************************************************************
+	
+	-> THIS CAN BE DONE IN 2 WAY THAT,
+				1. WITHOUT GLOBAL EXCEPTION HANDLING
+				2. WITH GLOBAL EXCEPTION HANDLING
+				
+				
+		
+		
+		-----------------------------
+		 WITHOUT GLOBAL EXCEPTION :-
+		-----------------------------
+				STEP-1 : CREATE A CLASS WITH REQUIRED VALIDATION:
+				------------------------------------------------
+				    
+					EXAMPLE :-
+						public class UserDTO {
+
+							@NotNull(message = "Name cannot be null")
+							@Size(min = 2, max = 20, message = "Name must be 2-20 characters")
+							private String name;
+
+							@Min(value = 18, message = "Age must be at least 18")
+							private int age;
+
+							@Email(message = "Email should be valid")
+							private String email;
+
+							// Getters & Setters
+						}
+						
+						
+				
+				
+				STEP-2 : Using "@Valid" and "BindingResult" in Controller:-
+				-----------------------------------------------------------
+				
+						@RestController
+						@RequestMapping("/users")
+						public class UserController {
+
+							@PostMapping
+							public Object createUser(@Valid @RequestBody UserDTO user, BindingResult result) {
+								// Check for validation errors
+								if (result.hasErrors()) {
+									Map<String, String> errors = new HashMap<>();
+									for (FieldError error : result.getFieldErrors()) {
+										errors.put(error.getField(), error.getDefaultMessage());
+									}
+									return errors; // return error map as response
+								}
+
+								// If no errors, process normally
+								return "User created successfully!";
+							}
+						}
+						
+						
+						
+				
+				-> How it works:
+
+						* Client sends JSON → Spring maps it to UserDTO.
+
+						* @Valid triggers validation.
+
+						* BindingResult captures all validation errors.
+
+						* You check result.hasErrors():
+
+						* If true → collect errors → return as response.
+
+						* If false → proceed with normal processing.
+						
+						
+						
+				
+				
+	****************************************************************** WITH GLOBAL EXCEPTION HANDLING *******************************************************
+	
+				STEP-2: USE @VALID IN CONTROLLER:
+				---------------------------------
+	
+							@RestController
+							@RequestMapping("/users")
+							public class UserController {
+
+								@PostMapping
+								public String createUser(@Valid @RequestBody UserDTO user) {
+									return "User created successfully!";
+								}
+							}
+	
+	
+				
+				STEP-3: MENTION "MethodArgumentNotValidException" in Global EXCEPTION handler:-
+				-------------------------------------------------------------------------------
+	
+							@ControllerAdvice
+							public class GlobalExceptionHandler {
+
+								@ExceptionHandler(MethodArgumentNotValidException.class)
+								public ResponseEntity<Map<String, String>> handleValidationErrors(MethodArgumentNotValidException ex) {
+									Map<String, String> errors = new HashMap<>();
+									ex.getBindingResult().getFieldErrors().forEach(error ->
+										errors.put(error.getField(), error.getDefaultMessage())
+									);
+									return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
+								}
+							}
+							
+							
+							
+							
+				-> How it Works End-to-End:
+				----------------------------
+
+							* Client sends JSON → Spring maps it to UserDTO.
+
+							* @Valid triggers validation automatically.
+
+							* If valid: Controller method executes → returns success.
+
+							* If invalid: Spring throws MethodArgumentNotValidException.
+
+							* @ControllerAdvice catches exception → formats error JSON → returns 400.
+							
+							
+							
+
+
+
