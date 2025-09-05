@@ -1,0 +1,161 @@
+
+	-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+	***************************************************************** SPRING SECURITY JWT TOKEN SUMMARY**************************************************************
+	------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	
+	
+	* JWT (JSON WEB TOKEN)
+	
+	* What is a JWT?
+	
+		-> A JWT is a compact, URL-safe token used for securely transmitting information between parties.
+		   It consists of three parts, separated by dots:
+	
+		-> JWT = [HEADER.PAYLOAD.SIGNATURE] 
+		
+		-> PARTS OF JWT TOKEN : 
+				1.HEADER [ Contains metadata about the token LIKE BELOW EX]
+				
+						{
+						  "alg": "HS256", // signing algorithm
+						  "typ": "JWT"    // type of token
+						}
+						
+				
+				2.PAYLOAD [ Contains claims/data about the user or entity ]
+						
+						{
+						  "sub": "123",        // user id
+						  "name": "John Doe",   // user name
+						  "role": "USER",       // role
+						  "iat": 1693917000     // issued at timestamp
+						}
+
+						-> Types of claims:
+								* Registered claims: sub, iss, exp, iat, etc.
+								* Public claims: custom fields defined publicly.
+								* Private claims: custom fields for internal use.
+							
+							
+				3.SIGNATURE [ Ensures authenticity and integrity of the token ]
+				
+						HMACSHA256(
+						   Base64UrlEncode(header) + "." + Base64UrlEncode(payload),
+						   secretKey
+						)
+						
+						*** SIGNATURE = HMACSHA256( Base64UrlEncode(Header) + "." + Base64UrlEncode(Payload),secretKey)		
+				
+				
+			
+			
+				
+	------------------------------------------------------------------------------------
+	******************* WHAT IS SIGUNATURE IN THIS, WHAT IS USE ************************
+	------------------------------------------------------------------------------------
+	
+	
+		-> The signature is like a tamper-proof seal. It ensures that:
+				*  The token was created by someone who has the secret/private key.
+				*  The token hasn’t been changed after it was issued.
+			*** Without the signature, anyone could modify the payload (e.g., change their role to ADMIN) and the server wouldn’t know.
+			
+			
+			
+		-> How the Signature is created
+				* The signature is made by combining of :
+						"Base64UrlEncode(Header) + "." + Base64UrlEncode(Payload)",
+
+				* and then applying a "cryptographic algorithm" using a secret key (for HMAC) or private key (for RSA).
+
+					-> HMACSHA256( Base64UrlEncode(Header) + "." + Base64UrlEncode(Payload),secret/private )				or 
+					-> RSA( Base64UrlEncode(Header) + "." + Base64UrlEncode(Payload),secret/private )
+
+
+
+
+
+
+	--------------------------------------------------------------------
+	******************* Why JWT with Spring Security *******************
+	--------------------------------------------------------------------
+
+			Traditional login = server stores a session for each user. Problem:
+					* Hard to scale across multiple servers (need sticky sessions).
+					* Session data must be stored in memory or DB.
+
+			JWT solution = stateless authentication:
+					* Server creates JWT after login.
+					* Client sends JWT on every request (Authorization: Bearer <token>).
+					* Server validates JWT signature, no session storage needed.
+
+			✅ Easier to scale
+			✅ Lightweight
+			✅ Secure (tamper-proof via signature)
+
+
+
+
+
+
+
+
+	-------------------------------------------------------			
+	************ HOW JWT TOKEN CREATES ********************
+	-------------------------------------------------------
+	
+		EX : 
+		
+			HEADER : {"alg":"HS256","typ":"JWT"} 
+					-> this will encrypty by Base64Url like [eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9]
+
+			PAYLOAD : {"sub":"123","name":"John Doe","role":"USER","iat":1693917000} 
+					-> this will encrypty by Base64Url like [ eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwicm9sZSI ]
+
+			SIGNATURE : HMACSHA256(Base64UrlEncode(header) + "." + Base64UrlEncode(payload), secretKey) 
+					-> It is a hash/fingerprint of header + payload + secret like [ TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ ]
+					
+					-> SIGNATURE = 
+					
+			
+			COMBINE ALL WITH ".": JWT = BASE64ENCRY(HEADER).BASE64(PAYLOAD).HMACSHA256(TJVA95OrM7E2cBab30RMHrHDcEfxjoYZg)
+			
+				JWT = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwicm9sZSI.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZg"
+				
+		
+		-> THIS IS HOW FINAL JWT TOKEN GENERATED AND RETURN
+		
+
+
+
+
+
+
+
+
+	---------------------------------------------------------------------------------------
+	******************* How JWT Works with Spring Security ********************************
+	---------------------------------------------------------------------------------------
+
+			STEP-1 : 
+				* User sends credentials (username, password) [here respective end point(API) is Public like no need because need JWT Token]
+				* Spring Security authenticates user (via AuthenticationManager).
+				* If valid → generate a JWT (with username + roles).
+				* Return JWT to client.
+				
+			STEP-2 : 
+				* Client stores JWT in localStorage, sessionStorage, or cookies.
+				* Every request to backend includes:
+						"Authorization: Bearer <JWT_TOKEN>"
+						
+			STEP-3 : 
+				* A custom JWT Filter runs for every request.
+				* It extracts JWT from header, validates it, and sets Authentication object in Spring Security context.
+				* Now Spring Security knows “who” the user is and “what roles” they have.
+			
+			STEP-4 : 
+				* Authorization:
+						- URL Matcher 
+						- Method Level 
+						
+			

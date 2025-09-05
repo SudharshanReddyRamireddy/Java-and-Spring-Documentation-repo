@@ -1,0 +1,163 @@
+
+*****************************************************************************
+			SPRING BOOT ANNOTATIONS LIST (EXTENDED)
+*****************************************************************************
+
+1️. CORE SPRING BOOT / CONFIGURATION ANNOTATIONS
+------------------------------------------------
+	@SpringBootApplication      - Main Spring Boot class
+	@Configuration              - Class as source of bean definitions
+	@Bean                       - Declares a bean inside @Configuration
+	@Primary                    - Marks default bean when multiple exist
+	@Value                      - Injects values from properties files
+	@Profile                    - Active beans for specific Spring profile
+	@EnableAutoConfiguration    - Enables Spring Boot auto-configuration
+	@ComponentScan              - Scans for @Component, @Service, etc.
+	@Import                     - Import additional configuration classes
+	@PropertySource             - Loads properties from a file
+	@EnableConfigurationProperties - Binds configuration properties to POJOs
+
+
+2️. DEPENDENCY INJECTION ANNOTATIONS
+------------------------------------
+	@Autowired                 - Injects bean by type
+	@Qualifier                 - Specify which bean to inject
+	@Resource                   - Injects bean by name/id
+	@Inject                     - JSR-330 inject by type
+	@Lazy                       - Marks bean for lazy initialization
+	@StepScope                  - Bean has step-level scope (Spring Batch)
+	@Value("${property}")       - Injects property values
+	@Required                   - Indicates a required dependency (legacy)
+
+
+
+3️. LIFECYCLE ANNOTATIONS
+-------------------------
+	@PostConstruct             - Runs after bean creation & DI
+	@PreDestroy                - Runs before bean destruction
+	@DependsOn                 - Specifies initialization order
+	@Order                     - Defines bean initialization priority
+	@Bean(initMethod="...")     - Custom init method
+	@Bean(destroyMethod="...")  - Custom destroy method
+
+
+
+
+4️. CONTROLLER / WEB ANNOTATIONS
+--------------------------------
+	@Controller                 - MVC controller
+	@RestController             - @Controller + @ResponseBody
+	@RequestMapping             - Maps HTTP requests
+	@GetMapping                 - Maps GET requests
+	@PostMapping                - Maps POST requests
+	@PutMapping                 - Maps PUT requests
+	@DeleteMapping              - Maps DELETE requests
+	@PatchMapping               - Maps PATCH requests
+	@PathVariable               - Extract URI path variables
+	@RequestParam               - Extract query parameters
+	@RequestBody                - Map request body to object
+	@CrossOrigin                - Enable CORS
+	@ControllerAdvice           - Global exception handling
+	@ExceptionHandler           - Handle exceptions in controllers
+	@AuthenticationPrincipal    - Get current user in Spring Security
+	@ResponseStatus             - Set HTTP status on response
+	@SessionAttributes          - Store model attributes in session
+	@CookieValue                - Bind method parameter to cookie value
+	@ModelAttribute             - Bind request parameters to model
+
+
+
+
+5️. VALIDATION / DATA ANNOTATIONS
+---------------------------------
+	@Valid                      - Trigger validation
+	@NotNull / @NotEmpty / @NotBlank - Validation constraints
+	@Size                        - Validate string/collection size
+	@Min / @Max                  - Validate numeric range
+	@Pattern                     - Validate regex pattern
+	@Enumerated                  - Map Java enum to DB
+	@Id                           - Primary key for JPA entity
+	@GeneratedValue              - Auto-generate primary key
+	@Column                       - Map field to DB column
+	@Table                        - Map class to DB table
+	@Transient                    - Field not persisted
+	@Lob                          - Large object (BLOB/CLOB)
+	@Version                      - Optimistic locking field
+	enum                          - Java enum type
+
+
+
+
+6️. TRANSACTION / DATABASE ANNOTATIONS
+--------------------------------------
+	@Transactional               - Transactional method/class
+	@Repository                 - Marks DAO/repository layer
+	@Modifying                  - Mark repository method as modifying query
+	@Query                       - Custom JPA query
+	@EnableJpaRepositories       - Enable JPA repository scanning
+	@Entity                      - Marks class as JPA entity
+	@Embeddable                  - Marks class embeddable in entity
+	@ElementCollection           - Map collection of basic/embeddable types
+	@Cacheable / @CacheEvict / @CachePut - JPA caching support
+
+
+
+7️. SCHEDULING / EVENT ANNOTATIONS
+----------------------------------
+	@EnableScheduling            - Enable scheduling
+	@Scheduled                   - Scheduled task
+	@EventListener               - Listen to Spring events
+	@Async                       - Run method asynchronously
+	@EnableAsync                 - Enable async support
+	@Order                        - Order of execution for scheduled/event beans
+
+
+
+8️. CACHING ANNOTATIONS
+-----------------------
+	@EnableCaching               - Enable caching
+	@Cacheable                   - Cache method results
+	@CacheEvict                  - Clear cache entries
+	@CachePut                    - Update cache without affecting method execution
+	@Caching                     - Combine multiple caching annotations
+
+
+
+9️. SECURITY ANNOTATIONS
+------------------------
+	@EnableWebSecurity           - Enable Spring Security
+	@PreAuthorize                - Method-level access control
+	@PostAuthorize               - Evaluate access after method execution
+	@Secured                     - Restrict method access by roles
+	@RolesAllowed                - JSR-250 role-based access
+	@AuthenticationPrincipal      - Current logged-in user
+	@EnableGlobalMethodSecurity   - Enable method-level security
+
+
+
+10. TESTING / MOCKITO ANNOTATIONS
+---------------------------------
+	@ExtendWith(MockitoExtension.class) - Integrates Mockito with JUnit 5
+	@SpringBootTest              - Load Spring Boot context for integration tests
+	@WebMvcTest                  - Load Spring MVC components
+	@MockBean                    - Mock bean in Spring context
+	@SpyBean                     - Spy bean in Spring context
+	@Test                         - JUnit test method
+	@BeforeEach / @AfterEach      - Setup/cleanup per test
+	@Disabled                     - Disable test method
+
+
+
+
+1️1. JAVA / LOMBOK / MISC ANNOTATIONS
+---------------------------------------
+	@Builder                      - Lombok builder pattern
+	@Getter / @Setter             - Lombok getters/setters
+	@NoArgsConstructor            - Lombok no-args constructor
+	@AllArgsConstructor           - Lombok all-args constructor
+	@FunctionalInterface          - Marks interface as functional
+	@Deprecated                   - Marks method/class as deprecated
+	@SuppressWarnings              - Suppress compiler warnings
+	@SafeVarargs                  - Suppress warnings for varargs
+	@Repeatable                   - Allow repeating annotation
+	@Documented                   - Include annotation in Javadoc
