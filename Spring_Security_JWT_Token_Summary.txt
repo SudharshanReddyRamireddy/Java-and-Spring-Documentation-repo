@@ -115,7 +115,7 @@
 			SIGNATURE : HMACSHA256(Base64UrlEncode(header) + "." + Base64UrlEncode(payload), secretKey) 
 					-> It is a hash/fingerprint of header + payload + secret like [ TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ ]
 					
-					-> SIGNATURE = 
+					-> SIGNATURE = TJVA95OrM7E2cBab30RMHrHDcEfxjoYZg
 					
 			
 			COMBINE ALL WITH ".": JWT = BASE64ENCRY(HEADER).BASE64(PAYLOAD).HMACSHA256(TJVA95OrM7E2cBab30RMHrHDcEfxjoYZg)
