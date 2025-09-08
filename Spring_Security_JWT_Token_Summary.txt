@@ -125,8 +125,8 @@
 		
 		-> THIS IS HOW FINAL JWT TOKEN GENERATED AND RETURN
 		
-
-
+		-> if you observe that you may found JWT token was separated by "." like 
+			JWT = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwicm9sZSI.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZg"
 
 
 
@@ -158,4 +158,4 @@
 						- URL Matcher 
 						- Method Level 
 						
-			
+		
