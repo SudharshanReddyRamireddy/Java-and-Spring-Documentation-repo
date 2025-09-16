@@ -1,0 +1,110 @@
+======================================== JAVA CLASS ========================================
+
+WHAT IS CLASS:
+----------------
+- A class is a blueprint or template for creating objects.
+- It defines the data (fields/variables) and behavior (methods) of objects.
+- A class groups variables and methods into a single unit.
+- Objects are instances of classes.
+
+--------------------------------------------------------------------------------------------
+
+WHAT A CLASS CAN CONTAIN:
+----------------------------
+- Fields (instance variables, static variables)
+- Methods (instance methods, static methods)
+- Constructors
+- Blocks (instance initializer blocks, static blocks)
+- Nested classes / inner classes
+- Enums
+
+--------------------------------------------------------------------------------------------
+
+SYNTAX EXAMPLE:
+----------------
+class Car {
+    // fields
+    String color;
+    static int wheels = 4;
+
+    // constructor
+    Car(String color) {
+        this.color = color;
+    }
+
+    // method
+    void drive() {
+        System.out.println("Car is driving");
+    }
+
+    // static method
+    static void displayWheels() {
+        System.out.println("All cars have " + wheels + " wheels");
+    }
+}
+
+public class TestClass {
+    public static void main(String[] args) {
+        Car c1 = new Car("Red");     // object creation
+        c1.drive();                  // call instance method
+        Car.displayWheels();         // call static method
+        System.out.println(c1.color);
+    }
+}
+
+--------------------------------------------------------------------------------------------
+
+TYPES OF CLASSES:
+-------------------
+1) Concrete Class
+   - Normal class with complete implementation.
+   - Can be instantiated.
+   - Example: class Car {}
+
+2) Abstract Class
+   - Declared with 'abstract' keyword.
+   - Cannot be instantiated.
+   - Can have abstract (no body) and non-abstract methods.
+   - Used to provide base class behavior.
+   - Example: abstract class Shape {}
+
+3) Final Class
+   - Declared with 'final' keyword.
+   - Cannot be extended (no subclasses allowed).
+   - Example: final class MathUtils {}
+
+4) Static Nested Class
+   - Declared static inside another class.
+   - Can be accessed without outer class object.
+   - Example: static class Engine {}
+
+5) Inner Class
+   - Defined inside another class.
+   - Needs an object of outer class to be accessed.
+   - Example: class Engine {}
+
+--------------------------------------------------------------------------------------------
+
+IMPORTANT POINTS:
+-------------------
+- A class is instantiated using the 'new' keyword.
+- A class can extend only one class (single inheritance).
+- A class can implement multiple interfaces.
+- Constructors are used to initialize objects.
+- If no constructor is defined, compiler provides a default constructor.
+- Static members belong to the class, not to instances.
+- Instance members belong to individual objects.
+- A class can be declared public or default (package-private).
+- A source file can have only one public class, and its name must match the filename.
+
+--------------------------------------------------------------------------------------------
+
+CLASS VS INTERFACE:
+---------------------
+- Class can have both implementation and data, Interface only defines methods (no state).
+- Class supports single inheritance, Interface supports multiple inheritance.
+- Class can be instantiated, Interface cannot be instantiated.
+- Class can have constructors, Interface cannot have constructors.
+- Class members can have any access modifier, Interface members are public by default.
+
+=============================================================================================

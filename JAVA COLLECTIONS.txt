@@ -1,0 +1,219 @@
+************************************************* JAVA COLLECTIONS ********************************************
+---------------------------------------------------------------------------------------------------------------
+
+1. COLLECTIONS : 
+   The Java Collections Framework (JCF) is a hierarchy of interfaces and classes 
+   for storing and manipulating groups of objects.
+
+   Main Subinterfaces of Collection:
+       * List 
+       * Set 
+       * Queue
+
+   Hierarchy Diagram:
+       Iterable
+          |
+       Collection
+       /    |     \
+     List   Set   Queue
+               \
+               Map  (⚠️ Not under Collection)
+
+   Detailed Hierarchy:
+       Iterable
+          |
+       Collection
+          ├── List
+          │    ├── ArrayList
+          │    ├── LinkedList
+          │    ├── Vector
+          │         └── Stack
+          ├── Set
+          │    ├── HashSet
+          │    ├── LinkedHashSet
+          │    └── TreeSet
+          ├── Queue
+          │    ├── LinkedList
+          │    └── PriorityQueue
+          └── Deque
+               └── ArrayDeque
+
+       Map (separate hierarchy)
+          ├── HashMap
+          ├── LinkedHashMap
+          ├── TreeMap
+          └── Hashtable
+
+Notes:
+   -> Iterable: The root interface of the collection hierarchy.
+   -> Collection: Parent interface of all single-element group containers (List, Set, Queue).
+   -> Map is NOT a child of Collection because it stores key-value pairs instead of single elements.
+   -> Any class implementing Iterable can be used in a for-each loop.
+
+
+
+
+
+----------------------------------------------------------------------------------------------------
+LIST : 
+   * List is a subinterface of Collection.
+   * Represents an ordered collection (sequence) of elements.
+   * Allows duplicates and preserves insertion order.
+   * Supports index-based access.
+
+   TYPES OF LIST:
+       1. ArrayList
+       2. LinkedList
+       3. Vector  (similar to ArrayList, but thread-safe)
+
+Comparison:
+
+                        ARRAYLIST                         LINKEDLIST
+
+ALLOW DUPLICATES        YES                                YES
+THREAD SAFETY           NO                                 NO
+ORDER                   INSERTION ORDER                   INSERTION ORDER
+RANDOM ACCESS           FAST                               SLOW
+INSERT/DELETE           SLOW                               FAST
+
+Notes:
+   * Use ArrayList when you want fast access/read.
+   * Use LinkedList when you want fast insert/delete.
+   * Use Vector when you need a thread-safe list.
+
+
+
+
+
+----------------------------------------------------------------------------------------------------
+SET :
+
+   * Set is a subinterface of Collection.
+   * Represents a collection of unique elements.
+   * Does NOT allow duplicates.
+   * No index-based access (unlike List).
+   * Mostly used to store unique values.
+
+   TYPES OF SET:
+       1. HashSet
+       2. LinkedHashSet
+       3. TreeSet
+
+Comparison:
+
+                        HASHSET                  LINKEDHASHSET               TREESET
+
+ALLOW DUPLICATES        NO                       NO                         NO
+THREAD SAFETY           NO                       NO                         NO
+ORDER                   NO ORDER                 INSERTION ORDER            SORTED ORDER
+RANDOM ACCESS           FAST                     FAST                        SLOW
+INSERT/DELETE           FAST                     FAST                        SLOW
+
+
+
+
+----------------------------------------------------------------------------------------------------
+QUEUE :
+
+   * Queue is a subinterface of Collection.
+   * Represents a collection designed for holding elements prior to processing.
+   * Follows FIFO (First In First Out) order (default).
+
+   TYPES OF QUEUE:
+       1. PriorityQueue
+       2. LinkedList
+       3. ArrayDeque
+
+Comparison:
+
+                        PRIORITYQUEUE             LINKEDLIST (as Queue)      ARRAYDEQUE
+
+ALLOW DUPLICATES        YES                       YES                        YES
+THREAD SAFETY           NO                        NO                         NO
+ORDER                   PRIORITY BASED           FIFO ORDER                 FIFO ORDER
+RANDOM ACCESS           NO                        NO                         NO
+INSERT/DELETE           FAST                      FAST                        FAST
+
+Notes:
+   * LinkedList is implemented with both List and Queue, so it comes under both List & Queue.
+   * Use PriorityQueue → when you need elements sorted by priority.
+   * Use LinkedList → when you need a normal FIFO queue.
+   * Use ArrayDeque → fastest FIFO queue that can also act as a stack.
+
+
+
+
+----------------------------------------------------------------------------------------------------
+MAP :
+
+   * Map is a separate hierarchy (not a Collection).
+   * Represents a collection of key-value pairs.
+   * Keys are unique, values can be duplicate.
+   * Useful for **fast lookup by key**.
+
+   TYPES OF MAP:
+       1. HashMap
+       2. LinkedHashMap
+       3. TreeMap
+       4. Hashtable
+
+Comparison:
+
+                        HASHMAP                   LINKEDHASHMAP               TREEMAP                 HASHTABLE
+
+ALLOW DUPLICATES        VALUES ONLY               VALUES ONLY                 VALUES ONLY             VALUES ONLY
+KEY UNIQUENESS           YES                       YES                        YES                     YES
+THREAD SAFETY           NO                        NO                         NO                      YES (synchronized)
+ORDER                   NO ORDER                 INSERTION ORDER            SORTED ORDER           NO ORDER
+NULL KEYS               YES (1 null)              YES (1 null)               NO                     NO
+NULL VALUES             YES                       YES                        YES                     NO
+PERFORMANCE             FAST                      FAST                        SLOW                    SLOW (legacy)
+
+Notes:
+   * Use HashMap → general-purpose key-value storage (fast, unsynchronized).
+   * Use LinkedHashMap → preserves insertion order.
+   * Use TreeMap → stores keys in sorted order.
+   * Use Hashtable → legacy synchronized map (rarely used now).
+
+
+
+--------------------------------------------------------------------------------------------------------
+
+****************************************************************************************************
+IMPORTANT POINTS / QUICK NOTES
+
+1. COLLECTIONS FRAMEWORK:
+   - Iterable is the root interface.
+   - Collection is parent of List, Set, Queue.
+   - Map is separate, stores key-value pairs.
+   - Any class implementing Iterable can be used in for-each loop.
+
+2. LIST:
+   - Ordered collection, allows duplicates.
+   - Access by index.
+   - ArrayList → fast random access, slow insert/delete.
+   - LinkedList → slow random access, fast insert/delete.
+   - Vector → thread-safe ArrayList, legacy.
+   - LinkedList implements both List & Queue.
+
+3. SET:
+   - Unique elements only, no duplicates.
+   - HashSet → fast, unordered.
+   - LinkedHashSet → preserves insertion order.
+   - TreeSet → sorted order.
+   - No index-based access.
+
+4. QUEUE:
+   - FIFO (First In First Out) by default.
+   - PriorityQueue → sorted by priority.
+   - LinkedList → normal FIFO queue.
+   - ArrayDeque → fastest FIFO queue, can also act as stack.
+   - LinkedList implements both List & Queue.
+
+5. MAP:
+   - Key-value pairs, keys unique, values can duplicate.
+   - HashMap → fast, unsynchronized.
+   - LinkedHashMap → preserves insertion order.
+   - TreeMap → sorted keys.
+   - Hashtable → synchronized, legacy.
+   - Only one null key allowed in HashMap/LinkedHashMap; null values allowed.

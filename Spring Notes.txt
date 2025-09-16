@@ -215,7 +215,7 @@
 						private String url;
 						
 						
-			->  @ConfigurationProperties() : This annotation will use to inject/bing a group of properties to a class like below
+			->  @ConfigurationProperties() : This annotation will use to inject/bring a group of properties to a class like below
 				EX :
 						@Component
 						@ConfigurationProperties(prefix = "spring.datasource")

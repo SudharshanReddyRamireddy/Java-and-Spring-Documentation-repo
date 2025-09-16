@@ -1,0 +1,117 @@
+========================================= JAVA MODIFIERS =========================================
+
+WHAT ARE MODIFIERS:
+---------------------
+- Modifiers are keywords used to define the **scope, behavior, and accessibility** of classes, methods, and variables.
+- There are **2 types of modifiers** in Java:
+
+        1) ACCESS MODIFIERS
+        2) NON-ACCESS MODIFIERS
+
+---------------------------------------------------------------------------------------------------
+
+
+
+1) ACCESS MODIFIERS
+----------------------
+- Control the visibility/scope of classes, methods, variables, and constructors.
+
+         MODIFIER       |   WITHIN CLASS   |   WITHIN PACKAGE   |   OUTSIDE PACKAGE (SUBCLASS)   |   OUTSIDE PACKAGE (NON-SUBCLASS)
+    ----------------------------------------------------------------------------------------------------------------
+         private         |       ✔️         |         ❌            |               ❌                         |           ❌
+         default         |       ✔️         |         ✔️            |               ❌                         |           ❌
+         protected       |       ✔️         |         ✔️            |               ✔️                         |           ❌
+         public          |       ✔️         |         ✔️            |               ✔️                         |           ✔️
+
+📌 Notes:
+   - **private**: Accessible only inside the same class.
+   - **default (package-private)**: Accessible only inside the same package (no keyword used).
+   - **protected**: Accessible in same package + subclasses in other packages.
+   - **public**: Accessible everywhere.
+
+---------------------------------------------------------------------------------------------------
+
+
+
+
+2) NON-ACCESS MODIFIERS
+----------------------------
+- Provide special properties to classes, methods, and variables.
+
+    NON-ACCESS MODIFIER     |  USED WITH              |  DESCRIPTION
+    ------------------------------------------------------------------------------------------
+    static                   | variables, methods      | Belongs to class, not to object.
+    final                    | variables, methods,
+                             | classes                 | Variable: constant
+                                                       | Method: cannot be overridden
+                                                       | Class: cannot be inherited
+
+    abstract                 | classes, methods         | Must be extended/implemented. Cannot be instantiated.
+    synchronized             | methods, blocks          | Used for thread safety (only one thread can access at a time)
+    volatile                 | variables                | Value of variable is always read from main memory
+    transient                | variables                | Skips variable during serialization
+    native                   | methods                  | Method implemented in native (non-Java) code (like C/C++)
+    strictfp                 | classes, methods         | Enforces strict floating-point calculations (platform-independent)
+
+---------------------------------------------------------------------------------------------------
+
+
+
+
+3) DEFAULT (INTERFACE METHODS) — Java 8+
+--------------------------------------------
+- Allows implementation inside interfaces.
+- Called using object of implementing class.
+- Helps to add new methods to interfaces without breaking existing code.
+
+Example:
+interface Vehicle {
+    default void honk() {
+        System.out.println("Beep Beep!");
+    }
+}
+
+class Car implements Vehicle {}
+
+Car c = new Car();
+c.honk();   // Beep Beep!
+
+📌 default methods are only allowed inside interfaces.
+
+---------------------------------------------------------------------------------------------------
+
+
+
+
+WHICH MODIFIERS CAN BE USED WHERE:
+--------------------------------------
+
+              | public  | protected   | default   | private   | static   | final    | abstract  | synchronized    | volatile   | transient     | native    | strictfp
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Class         |   ✔️    |     ❌      |   ✔️     |   ❌      |   ❌     |   ✔️    |   ✔️      |      ❌         |    ❌      |    ❌        |   ❌      |    ✔️
+Interface     |   ✔️    |     ❌      |   ✔️     |   ❌      |   ❌     |   ❌    |   ✔️      |      ❌         |    ❌      |    ❌        |   ❌      |    ✔️
+Method        |   ✔️    |     ✔️      |   ✔️     |   ✔️      |   ✔️     |   ✔️    |   ✔️      |      ✔️         |    ❌      |    ❌        |   ✔️      |    ✔️
+Variable      |   ✔️    |     ✔️      |   ✔️     |   ✔️      |   ✔️     |   ✔️    |   ❌      |      ❌         |    ✔️      |    ✔️        |   ❌      |    ❌
+Constructor   |   ✔️    |     ✔️      |   ✔️     |   ✔️      |   ❌     |   ❌    |   ❌      |      ❌         |    ❌      |    ❌        |   ❌      |    ❌
+
+📌 Notes:
+- Top-level classes/interfaces can only be **public** or **default (package-private)**.
+- Interface members are **public static final** by default.
+- Interface methods are **public abstract** by default.
+- From Java 8: Interfaces can have **default** and **static** methods.
+- From Java 9: Interfaces can have **private** methods (helper methods inside interface).
+
+---------------------------------------------------------------------------------------------------
+
+
+
+
+IMPORTANT POINTS:
+-------------------
+- A class can extend only one class but implement multiple interfaces.
+- A class can be public, abstract, final, strictfp.
+- A method can be public/private/protected, static, final, abstract, synchronized, native, strictfp.
+- A variable can be public/private/protected, static, final, transient, volatile.
+- Constructors cannot be static, final, abstract, synchronized, or native.
+
+====================================================================================================

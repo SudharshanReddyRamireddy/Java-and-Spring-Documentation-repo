@@ -1,0 +1,157 @@
+
+======================================= JAVA OOPs =======================================
+
+WHAT IS OOPs:
+---------------
+- OOPs (Object Oriented Programming) is a programming paradigm based on the concept of "objects".
+- It organizes code into classes and objects to increase reusability, flexibility, and maintainability.
+- Java is a fully object-oriented language (except primitive types).
+
+-------------------------------------------------------------------------------------------
+
+MAIN PRINCIPLES OF OOPs:
+----------------------------
+There are **4 Core Pillars** of OOPs in Java:
+
+1) ENCAPSULATION
+2) INHERITANCE
+3) POLYMORPHISM
+4) ABSTRACTION
+
+Also important: **CLASS, OBJECT, CONSTRUCTOR, INTERFACE**
+
+-------------------------------------------------------------------------------------------
+
+1) CLASS
+----------
+- A class is a blueprint/template for creating objects.
+- Contains fields, methods, constructors, blocks, inner classes.
+
+Example:
+class Car {
+    String color;
+    void drive() {
+        System.out.println("Car is driving");
+    }
+}
+
+-------------------------------------------------------------------------------------------
+
+2) OBJECT
+------------
+- An object is an instance of a class.
+- Has state (fields/variables) and behavior (methods).
+
+Example:
+Car c1 = new Car();   // object created from class Car
+
+-------------------------------------------------------------------------------------------
+
+3) CONSTRUCTOR
+-----------------
+- Special method used to initialize objects.
+- Has the same name as the class.
+- No return type.
+- Called automatically during object creation.
+- Types: Default, Parameterized, Copy constructor.
+
+Example:
+Car(String c) {
+    this.color = c;
+}
+
+-------------------------------------------------------------------------------------------
+
+4) ENCAPSULATION
+--------------------
+- Wrapping of data (fields) and code (methods) together as a single unit (class).
+- Achieved using private fields + public getters/setters.
+- Improves data security and hides implementation.
+
+Example:
+class Student {
+    private String name;
+    public void setName(String name) { this.name = name; }
+    public String getName() { return name; }
+}
+
+-------------------------------------------------------------------------------------------
+
+5) INHERITANCE
+-------------------
+- One class (child) can inherit properties and methods from another class (parent).
+- Promotes code reusability.
+- Achieved using 'extends' keyword.
+- Types:
+    * Single
+    * Multilevel
+    * Hierarchical
+    (* Multiple via Interfaces only)
+
+Example:
+class Animal {}
+class Dog extends Animal {}
+
+-------------------------------------------------------------------------------------------
+
+6) POLYMORPHISM
+-------------------
+- Means "many forms" — same method behaves differently based on object or parameters.
+- Two types:
+
+    a) Compile-Time (Method Overloading)
+        - Same method name, different parameter list.
+        - Resolved at compile time.
+        
+    b) Runtime (Method Overriding)
+        - Child class provides its own implementation of parent class method.
+        - Resolved at runtime (Dynamic dispatch).
+
+Example Overloading:
+void add(int a, int b)
+void add(int a, int b, int c)
+
+Example Overriding:
+class Animal { void sound(){} }
+class Dog extends Animal { void sound(){ System.out.println("Bark"); } }
+
+-------------------------------------------------------------------------------------------
+
+7) ABSTRACTION
+--------------------
+- Hiding internal implementation details and showing only necessary functionality.
+- Achieved using:
+     * Abstract Classes (0 to 100% abstraction)
+     * Interfaces (100% abstraction before Java 8)
+- Improves security and reduces complexity.
+
+Example:
+abstract class Vehicle {
+    abstract void start();
+}
+
+-------------------------------------------------------------------------------------------
+
+OTHER IMPORTANT OOPs CONCEPTS:
+---------------------------------
+- **this** keyword → refers to current object
+- **super** keyword → refers to parent class
+- **final** keyword → to make class/method/variable non-modifiable
+- **static** keyword → class-level members
+- **instanceof** operator → check object type
+- **method overriding vs overloading**
+- **HAS-A relationship (Composition)**
+- **IS-A relationship (Inheritance)**
+
+-------------------------------------------------------------------------------------------
+
+BENEFITS OF OOPs:
+-------------------
+✔ Code Reusability
+✔ Modularity
+✔ Maintainability
+✔ Security
+✔ Extensibility
+✔ Real-world modeling
+
+============================================================================================

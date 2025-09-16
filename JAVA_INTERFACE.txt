@@ -1,0 +1,118 @@
+
+==================================== JAVA INTERFACES ====================================
+
+WHAT IS INTERFACE:
+-------------------
+- INTERFACE = ABSTRACTION + LOOSE COUPLING
+- Interface is a reference type in Java (like a class).
+- It is a collection of abstract methods (before Java 8) and can also contain default, static methods (Java 8+) and private methods (Java 9+).
+- Interface is used to achieve:
+     * Abstraction
+     * Multiple Inheritance
+     * Loose Coupling
+- A class implements an interface using 'implements' keyword.
+
+------------------------------------------------------------------------------------------
+
+
+
+
+
+WHAT INTERFACE CAN CONTAIN:
+-----------------------------
+- Abstract methods (by default public & abstract)
+- Default methods (Java 8+)
+- Static methods (Java 8+)
+- Private methods (Java 9+)
+- Constants (public static final fields)
+------------------------------------------------------------------------------------------
+
+
+
+SYNTAX EXAMPLE:
+---------------
+interface Vehicle {
+    int MAX_SPEED = 120;         // constant (public static final)
+    void start();                 // abstract method
+    void stop();
+
+    default void honk() {         // default method (Java 8+)
+        System.out.println("Beep Beep!");
+    }
+
+    static void info() {          // static method (Java 8+)
+        System.out.println("Vehicle interface");
+    }
+}
+
+class Car implements Vehicle {
+    public void start() {
+        System.out.println("Car started");
+    }
+    public void stop() {
+        System.out.println("Car stopped");
+    }
+}
+
+public class TestInterface {
+    public static void main(String[] args) {
+        Car c = new Car();
+        c.start();      // Car started
+        c.honk();       // Beep Beep!
+        Vehicle.info(); // Vehicle interface
+    }
+}
+
+------------------------------------------------------------------------------------------
+
+
+
+TYPES OF INTERFACES:
+---------------------
+1) Normal Interface
+   - Contains only abstract methods (Java 7 and below).
+   - Example: interface A { void run(); }
+
+2) Functional Interface
+   - Has exactly one abstract method.
+   - Can have many default or static methods.
+   - Used with Lambda expressions.
+   - Annotated with @FunctionalInterface.
+   - Example: interface MyFun { void task(); }
+
+3) Marker Interface
+   - Contains no methods.
+   - Used to give metadata to a class.
+   - Example: Serializable, Cloneable
+
+------------------------------------------------------------------------------------------
+
+
+
+
+
+IMPORTANT POINTS:
+-------------------
+- Interfaces cannot be instantiated.
+- Interface fields are by default: public, static, final
+- Interface methods are by default: public, abstract
+- A class can implement multiple interfaces.
+- An interface can extend multiple interfaces.
+- Interfaces cannot have constructors.
+- Default and static methods were introduced in Java 8.
+- Private methods in interfaces were introduced in Java 9.
+- Used to define a contract that implementing classes must follow.
+
+------------------------------------------------------------------------------------------
+
+
+
+
+INTERFACE VS CLASS:
+---------------------
+- class uses 'extends', interface uses 'implements'.
+- class can extend only one class, but implement multiple interfaces.
+- interface supports multiple inheritance, class does not.
+- interface cannot have constructors, class can.
+
+==========================================================================================
