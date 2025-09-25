@@ -19,30 +19,38 @@
                \
                Map  (⚠️ Not under Collection)
 
+   
+   
    Detailed Hierarchy:
+   
        Iterable
           |
-       Collection
-          ├── List
-          │    ├── ArrayList
-          │    ├── LinkedList
-          │    ├── Vector
-          │         └── Stack
-          ├── Set
-          │    ├── HashSet
-          │    ├── LinkedHashSet
-          │    └── TreeSet
-          ├── Queue
-          │    ├── LinkedList
-          │    └── PriorityQueue
-          └── Deque
-               └── ArrayDeque
+       Collection (root interface)
+			├── List (ordered, allows duplicates)
+			│    ├── ArrayList
+			│    ├── LinkedList
+			│    ├── Vector (synchronized, legacy)
+			│         └── Stack (legacy LIFO stack)
+			├── Set (no duplicates)
+			│    ├── HashSet (unordered)
+			│    ├── LinkedHashSet (insertion order)
+			│    └── TreeSet (sorted, implements NavigableSet)
+			├── Queue (FIFO)
+			│    ├── LinkedList (also implements List)
+			│    └── PriorityQueue (sorted by priority)
+			└── Deque (double-ended queue)
+				 └── ArrayDeque (resizable array, stack/queue)
 
-       Map (separate hierarchy)
-          ├── HashMap
-          ├── LinkedHashMap
-          ├── TreeMap
-          └── Hashtable
+
+       Map (key-value pairs)
+		├── HashMap            // fast, unordered
+		├── LinkedHashMap      // preserves insertion order
+		├── TreeMap            // sorted by key, implements NavigableMap
+		├── Hashtable          // synchronized, legacy
+		├── ConcurrentHashMap  // modern thread-safe
+		├── WeakHashMap        // keys are weakly referenced (for caching)
+		└── IdentityHashMap    // uses reference equality (==) for keys
+
 
 Notes:
    -> Iterable: The root interface of the collection hierarchy.

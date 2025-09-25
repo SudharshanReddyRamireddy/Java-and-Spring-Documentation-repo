@@ -1,0 +1,145 @@
+
+\##############################
+
+# DSA with Java - Reference Notes
+
+\##############################
+
+---
+
+## 1. Java Basics (Prerequisite)
+
+* Variables, Data Types, Operators
+* Control Statements: if, switch, loops (for, while, do-while)
+* Methods / Functions
+* Object-Oriented Programming (OOP): Classes, Objects, Inheritance, Polymorphism, Encapsulation
+* Arrays
+* Strings and String Manipulation
+* Exception Handling
+* Basic I/O
+
+**Practice:** Solve simple Java problems on HackerRank or LeetCode.
+
+---
+
+## 2. Time Complexity
+
+* Measures **how fast the code runs** as input grows.
+* Uses **Big-O notation**.
+
+**Common Types:**
+
+* O(1) : Constant → runtime does not depend on input size.
+* O(n) : Linear → runtime grows linearly with input.
+* O(n²) : Quadratic → nested loops.
+* O(log n) : Logarithmic → halves input each step.
+* O(n log n) : Linearithmic → e.g., Merge Sort.
+
+**Java Examples:**
+
+* O(1): `int x = arr[0];`
+* O(n): `for(int i=0;i<n;i++){...}`
+* O(n²): `for(int i=0;i<n;i++){for(int j=0;j<n;j++){...}}`
+
+**Rule:**
+
+* O(1): One action.
+* O(n): Go through all elements once.
+* O(n²): Compare all elements with each other.
+
+---
+
+## 3. Space Complexity
+
+* Measures **how much memory your program uses**.
+* Includes variables, arrays, hashmaps, recursion stack.
+
+**Common Types:**
+
+* O(1): Constant memory → few variables.
+* O(n): Linear memory → array/list of size n.
+* O(n²): 2D array or adjacency matrix.
+
+**Examples:**
+
+1. Constant:
+
+```java
+int sum = 0; // O(1)
+```
+
+2. Array:
+
+```java
+int[] arr = new int[n]; // O(n)
+```
+
+3. Recursion:
+
+```java
+void printNumbers(int n){
+    if(n==0) return;
+    printNumbers(n-1);
+}
+// O(n) for call stack
+```
+
+**Key Difference:**
+
+| Type      | Memory                 | Example                   |
+| --------- | ---------------------- | ------------------------- |
+| Array     | Heap (data)            | int\[] arr = new int\[n]; |
+| Recursion | Stack (function calls) | Recursive functions       |
+
+---
+
+## 4. Basic Data Structures
+
+* Arrays: 1D & 2D, insert, delete, traverse
+* Strings: Palindrome, reverse, substring operations
+* Linked Lists: Singly, Doubly, Circular, traversal, insertion, deletion
+* Stack & Queue: Implement using arrays or linked list
+* HashMap / HashSet: key-value storage, frequency count
+* Trees: Binary Tree, BST, traversals
+* Graphs: Adjacency list/matrix, BFS, DFS
+* Heap / PriorityQueue: MinHeap, MaxHeap
+
+---
+
+## 5. Algorithms
+
+* Sorting: Bubble, Selection, Insertion, Merge, Quick, Heap
+* Searching: Linear, Binary
+* Recursion: Factorial, Fibonacci, Backtracking (N-Queens, Sudoku)
+* Dynamic Programming (DP): Fibonacci, Knapsack, Coin Change, Longest Common Subsequence
+* Graph Algorithms: Dijkstra, Bellman-Ford, Kruskal, Prim
+* Greedy Algorithms: Activity Selection, Fractional Knapsack
+
+---
+
+## 6. Practice
+
+* Platforms: LeetCode, HackerRank, GeeksforGeeks, Codeforces
+* Strategy: Easy → Medium → Hard
+* Implement everything from scratch first
+* Always check time & space complexity
+
+---
+
+## 7. Application / Mini Projects
+
+* Mini search engine (Trie + HashMap)
+* Personal task scheduler (PriorityQueue + TreeMap)
+* Sudoku solver (Recursion & Backtracking)
+* Graph-based features (Social network connections)
+
+---
+
+## 8. Tip / Notes
+
+* Time Complexity: "How fast your code runs"
+* Space Complexity: "How much memory your code uses"
+* Arrays vs Recursion O(n): Array → heap, Recursion → stack
+* Always try to optimize both time and space
+* Dry-run algorithms on paper before coding
+* Keep a notebook of problem-solving patterns

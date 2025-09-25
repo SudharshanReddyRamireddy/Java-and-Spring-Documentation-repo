@@ -1,0 +1,188 @@
+=========================================================
+                HOW A JAVA PROGRAM RUNS
+=========================================================
+
+   JDK  =  JRE + Compiler + Tools
+		   JRE  =  JVM + Libraries
+				   JVM  =  Heart of Java Execution
+
+
+
+=========================================================
+  1) JDK (Java Development Kit)
+---------------------------------------------------------
+ - Contains everything needed to DEVELOP Java programs
+ - Includes:
+      * javac (compiler)
+      * java (runtime launcher)
+      * tools (debugger, javadoc, etc.)
+ - Role: Write, Compile, and Run code
+
+
+
+
+=========================================================
+  2) JRE (Java Runtime Environment)
+---------------------------------------------------------
+ - Provides environment to RUN Java applications
+ - Includes:
+      * JVM (Java Virtual Machine)
+      * Core libraries (Collections, IO, etc.)
+ - Role: Execute bytecode (cannot compile)
+
+
+
+
+=========================================================
+  3) JVM (Java Virtual Machine)
+---------------------------------------------------------
+ - Abstract machine to RUN Java bytecode
+ - Platform-dependent implementation
+ - Responsibilities:
+      * Load classes
+      * Verify bytecode
+      * Execute bytecode
+      * Convert bytecode → Machine code (JIT)
+      * Manage memory (Garbage Collection)
+
+
+
+=========================================================
+  4) JAVA EXECUTION STEPS
+---------------------------------------------------------
+
+ STEP 1: WRITE CODE
+ -------------------
+   - File: Hello.java
+   - Example:
+       class Hello {
+           public static void main(String[] args) {
+               System.out.println("Hello, World!");
+           }
+       }
+
+ STEP 2: COMPILE CODE
+ ---------------------
+   - Command: javac Hello.java
+   - Compiler does:
+       * Syntax checking
+       * Convert .java → .class (bytecode)
+   - Output: Hello.class
+
+ STEP 3: RUN PROGRAM
+ -------------------
+   - Command: java Hello
+   - JVM does:
+       * Loads Hello.class
+       * Finds main()
+       * Executes instructions
+       * Produces OUTPUT
+
+   [Flow Diagram]
+   --------------------------------------------
+   Hello.java   --(javac)-->   Hello.class
+                               --(java/JVM)-->   Output
+   --------------------------------------------
+
+
+
+=========================================================
+  5) PLATFORM INDEPENDENT vs DEPENDENT
+---------------------------------------------------------
+
+ JAVA IS PLATFORM INDEPENDENT ✅
+ -------------------------------
+ - You write code once (.java)
+ - Compiler converts it into BYTECODE (.class)
+ - Bytecode is UNIVERSAL (same on Windows, Mac, Linux)
+
+ => "Write Once, Run Anywhere" (WORA)
+
+ JVM IS PLATFORM DEPENDENT ⚡
+ ----------------------------
+ - To run bytecode, each OS needs its own JVM:
+      * Windows JVM
+      * Linux JVM
+      * Mac JVM
+ - Why? Because JVM must talk to underlying OS & hardware
+
+ 💡 Analogy:
+ - Bytecode = Universal script (English)
+ - JVM      = Translator (different for each place)
+   * In France → French translator
+   * In Japan  → Japanese translator
+   * In Germany→ German translator
+
+ - The STORY (bytecode) stays same,
+   but the TRANSLATOR (JVM) changes.
+
+
+
+=========================================================
+  6) WHERE IS BYTECODE (.class) FILE?
+---------------------------------------------------------
+
+ After compilation:
+   javac Hello.java
+ → Creates Hello.class file in the same folder.
+
+ When running:
+   java Hello
+ → JVM uses Hello.class, but does NOT delete it.
+ → The .class file stays unless you remove it manually.
+
+ To view bytecode instructions:
+   javap -c Hello
+
+
+
+---------------------------------------------------------
+  ECLIPSE IDE BEHAVIOR
+ --------------------------------------------------------
+ - Eclipse automatically compiles .java files.
+ - By default:
+     * Source files → in "src/" folder
+     * Bytecode (.class) → in "bin/" folder
+
+ Project Structure:
+   MyProject/
+     ├── src/
+     │    └── Hello.java
+     ├── bin/
+     │    └── Hello.class
+
+ - Even after running the program, .class files remain
+   in "bin/" until you clean or delete the project.
+
+ How to SEE .class in Eclipse:
+   1. Switch to "Navigator" view OR open folder in Explorer
+   2. Open bin/ → you’ll see Hello.class
+   3. Double-click in Eclipse → shows decompiled code
+   4. Or run "javap -c Hello" in bin/ to see actual bytecode
+
+
+
+=========================================================
+  7) EXTRA CONCEPTS
+---------------------------------------------------------
+ - BYTECODE: Platform-independent instructions (.class)
+ - JIT COMPILER: Converts bytecode to native machine code
+ - GARBAGE COLLECTOR: Frees unused memory automatically
+ - CLASS LOADER: Dynamically loads required classes
+ - ERRORS:
+     * Compile-time → syntax issues (checked by compiler)
+     * Runtime → exceptions (detected during execution)
+
+
+
+=========================================================
+  8) QUICK SUMMARY
+---------------------------------------------------------
+ - JDK = Full toolkit (Write + Compile + Run)
+ - JRE = Only run Java apps
+ - JVM = Executes bytecode
+ - Flow = Write → Compile → Run
+ - Java = Platform Independent (Bytecode)
+ - JVM  = Platform Dependent (Different per OS)
+
+=========================================================

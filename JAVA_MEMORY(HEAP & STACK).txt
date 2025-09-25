@@ -1,0 +1,192 @@
+========================================
+           JAVA MEMORY NOTES
+       (Stack, Heap, Garbage Collection)
+========================================
+
+----------------------------------------
+1. MEMORY AREAS IN JAVA
+----------------------------------------
+Java mainly uses two types of memory:
+
+- Stack  : for method calls and local variables
+- Heap   : for objects created at runtime
+
+----------------------------------------
+2. STACK MEMORY
+----------------------------------------
+- Used to store:
+    * Method/function call information
+    * Local variables
+    * Function parameters
+    * Return address (back to where method was called)
+
+- Works like a stack of plates:
+    * LIFO (Last In, First Out)
+    * Last method called is the first to finish
+
+- Each method call creates a stack frame
+- When method ends, its frame is removed automatically
+- Very fast access
+- Limited size
+- Error: StackOverflowError (if too many nested calls)
+
+		Example:
+		----------
+		void main() {
+			int x = 10; 
+			sum(x, 20);
+		}
+
+		void sum(int a, int b) {
+			int result = a + b;
+		}
+		// x, a, b, result all live in stack and are removed after methods finish
+
+----------------------------------------
+3. HEAP MEMORY
+----------------------------------------
+- Used to store:
+    * Objects created using 'new'
+    * Instance variables of objects
+
+- Objects stay in heap until they are no longer referenced
+- Managed by Garbage Collector (GC)
+- Slower than stack but can store large data
+
+		Example:
+		----------
+		class Person {
+			String name;
+		}
+
+		void main() {
+			Person p = new Person();  // object stored in heap
+			p.name = "John";           // 'p' reference is on stack
+		}
+
+		// 'p' is on stack
+		// Person object is on heap and stays until GC removes it
+
+----------------------------------------
+4. LIFO (LAST IN FIRST OUT)
+----------------------------------------
+Definition:
+- LIFO means the item that goes in LAST will come out FIRST.
+
+Real-Life Example:
+- Stack of plates:
+    - Place plates one on top of another
+    - Take only from the top
+    - Last plate placed is the first taken out
+
+		Example Order:
+			Push plate A
+			Push plate B
+			Push plate C
+			Pop  -> gives C (last in)
+			Pop  -> gives B
+			Pop  -> gives A (first in)
+
+			Java Example:
+			----------
+			void main() {
+				methodA();
+			}
+
+			void methodA() {
+				methodB();
+			}
+
+			void methodB() {
+				System.out.println("Hello");
+			}
+
+			// Stack order:
+			// 1. main() goes first
+			// 2. methodA() on top of main()
+			// 3. methodB() on top of methodA()
+			// Finish order: methodB ends first, then methodA, then main()
+			// This is LIFO
+
+----------------------------------------
+5. FIFO (FIRST IN FIRST OUT)
+----------------------------------------
+- Just for understanding (not used by stack)
+- FIFO means the item that goes in FIRST will come out FIRST
+- Example: line at a ticket counter
+    - Person1 enters line
+    - Person2 enters line
+    - Person1 comes out first
+
+----------------------------------------
+6. GARBAGE COLLECTION (GC)
+----------------------------------------
+- GC frees heap memory by deleting unused (unreferenced) objects
+- Happens when:
+    * Object has no reference
+    * JVM decides to run GC (usually when heap is low)
+
+- Automatic process
+- Can request (not force) using System.gc();
+
+		Example:
+		----------
+		Person p1 = new Person();  // object1
+		p1 = new Person();          // object2
+		// object1 now has no reference -> eligible for GC
+
+----------------------------------------
+7. STACK VS HEAP DIAGRAM
+----------------------------------------
+Memory layout visualization:
+
+STACK (methods)       HEAP (objects)
+----------------      ----------------
+| methodB()      |      | Person obj1 |
+| methodA()      |      | Person obj2 |
+| main()         |      | ...         |
+----------------      ----------------
+
+Notes:
+- Stack grows and shrinks as methods are called and finished
+- Heap objects stay until Garbage Collector removes them
+- References from stack point to objects in heap
+
+----------------------------------------
+8. KEY DIFFERENCES
+----------------------------------------
+STACK
+- Stores: local variables, call info
+- Order: LIFO
+- Removed: when method ends
+- Managed by: compiler
+- Speed: very fast
+- Size: small
+- Error: StackOverflowError
+
+HEAP
+- Stores: objects
+- Order: no fixed order
+- Removed: by garbage collector
+- Managed by: JVM (GC)
+- Speed: slower
+- Size: large
+- Error: OutOfMemoryError
+
+----------------------------------------
+9. IMPORTANT POINTS
+----------------------------------------
+- Stack is for temporary short-lived data
+- Heap is for long-lived objects
+- Stack clears automatically
+- Heap clears only by GC
+- Remove references to unused objects so GC can clean them
+
+----------------------------------------
+SUMMARY
+----------------------------------------
+Stack  -> Temporary -> Auto removed when method ends
+Heap   -> Long-term -> Removed by Garbage Collector
+GC     -> Deletes unused objects in heap
+LIFO   -> Last in, First out (used by stack)
+FIFO   -> First in, First out (used by queues)
