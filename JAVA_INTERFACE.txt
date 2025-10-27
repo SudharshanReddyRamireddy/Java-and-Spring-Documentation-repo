@@ -11,6 +11,7 @@ WHAT IS INTERFACE:
      * Multiple Inheritance
      * Loose Coupling
 - A class implements an interface using 'implements' keyword.
+- Here, Abstraction means, Hiding Implemantation Of method Functionalaty , that in interface maily contains Abstract Methods right, it cannot conatins Body.
 
 ------------------------------------------------------------------------------------------
 

@@ -1,0 +1,160 @@
+-----------------------------------------------------------
+        🧾 HOW TO GENERATE .JAR FILE IN SPRING BOOT 
+                 (USING MAVEN BUILD TOOL)
+-----------------------------------------------------------
+
+
+-----------------------------------------------------------
+📂 STEP 1: OPEN YOUR PROJECT FOLDER
+-----------------------------------------------------------
+	Example path:
+	   D:\Sudharshan\SPRING_PRACTICE_PROJECTS\Sample_Spring_Project
+
+	To open terminal in this folder:
+	   ➤ Right-click → “Open in Terminal” 
+	   OR
+	   ➤ Open Command Prompt → navigate using:
+		   cd D:\Sudharshan\SPRING_PRACTICE_PROJECTS\Sample_Spring_Project
+
+
+
+
+
+
+
+-----------------------------------------------------------
+⚙️ STEP 2: CLEAN PREVIOUS BUILDS
+-----------------------------------------------------------
+	Run this command:
+
+	   CMD: mvn clean
+
+	This removes any previously compiled files and ensures a fresh build.
+
+
+
+
+
+
+-----------------------------------------------------------
+🏗️ STEP 3: BUILD THE JAR FILE
+-----------------------------------------------------------
+	Run this command:
+
+	   CMD: mvn package
+
+	This command compiles your project, runs tests, and creates the JAR file.
+
+	If you want to skip tests while building:
+	   
+	   CMD: mvn clean package -DskipTests
+
+
+
+
+
+
+
+
+-----------------------------------------------------------
+🧱 STEP 4: VERIFY BUILD SUCCESS
+-----------------------------------------------------------
+	After a successful build, you will see a message like:
+
+	   EX: BUILD SUCCESS
+		   [INFO] BUILD SUCCESS
+		   [INFO] Total time: 8.123 s
+		   [INFO] Finished at: 2025-10-24T12:10:45+05:30
+
+
+
+
+
+
+
+
+
+-----------------------------------------------------------
+📁 STEP 5: LOCATE YOUR .JAR FILE
+-----------------------------------------------------------
+	Your JAR file will be automatically generated at:
+
+	Example path:
+	   D:\Sudharshan\SPRING_PRACTICE_PROJECTS\Sample_Spring_Project\target\Sample_Spring_Project-0.0.1-SNAPSHOT.jar
+
+
+
+
+
+
+
+
+
+
+-----------------------------------------------------------
+🚀 STEP 6: RUN THE JAR FILE (TEST)
+-----------------------------------------------------------
+	You can test the generated JAR file without Docker by running:
+
+	   CMD: java -jar target\Sample_Spring_Project-0.0.1-SNAPSHOT.jar
+
+	NOTE : If your application starts successfully, it means the JAR was built correctly.
+	       You will see logs like “Tomcat started on port(s): 8080 (http)”
+
+
+
+
+
+
+
+
+
+-----------------------------------------------------------
+🧩 STEP 7: COMMON ERRORS & FIXES
+-----------------------------------------------------------
+
+	POSSIBLE MISTAKES -1:
+	------------------
+	❌ ERROR: JAVA_HOME is not set properly
+	✅ FIX:
+	   - Make sure your JAVA_HOME points to valid JDK path.
+	   Example:
+		 setx JAVA_HOME "C:\Program Files\Eclipse Adoptium\jdk-17"
+
+	POSSIBLE MISTAKES - 2:
+	------------------
+	❌ ERROR: mvn not recognized
+	✅ FIX:
+	   - Ensure Maven is installed and added to PATH.
+	   - Test by running: mvn -version
+
+	POSSIBLE MISTAKES - 3:
+	------------------
+	❌ ERROR: Main class not found
+	✅ FIX:
+	   - Ensure your `pom.xml` contains Spring Boot plugin:
+		 <build>
+		   <plugins>
+		     <plugin>
+		       <groupId>org.springframework.boot</groupId>
+		       <artifactId>spring-boot-maven-plugin</artifactId>
+		     </plugin>
+		   </plugins>
+		 </build>
+
+
+
+
+
+
+-----------------------------------------------------------
+✅ QUICK SUMMARY
+-----------------------------------------------------------
+		Step 1 → Open project folder in CMD  
+		Step 2 → Run: mvn clean  
+		Step 3 → Run: mvn package  
+		Step 4 → Find JAR in: target/  
+		Step 5 → Run app: java -jar target/<your-jar>.jar  
+
+
+

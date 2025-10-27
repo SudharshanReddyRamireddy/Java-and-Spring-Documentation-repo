@@ -1,0 +1,124 @@
+-----------------------------------------------------------
+        🧾 HOW TO GENERATE .JAR FILE IN SPRING BOOT 
+               (USING GRADLE BUILD TOOL)
+-----------------------------------------------------------
+
+
+-----------------------------------------------------------
+📂 STEP 1: OPEN YOUR PROJECT FOLDER
+-----------------------------------------------------------
+	Example path:
+	   D:\Sudharshan\SPRING_PRACTICE_PROJECTS\Sample_Spring_Project
+
+	To open terminal in this folder:
+	   ➤ Right-click → “Open in Terminal” 
+	   OR
+	   ➤ Open Command Prompt → navigate using:
+		   cd D:\Sudharshan\SPRING_PRACTICE_PROJECTS\Sample_Spring_Project
+
+
+
+-----------------------------------------------------------
+⚙️ STEP 2: CLEAN PREVIOUS BUILDS
+-----------------------------------------------------------
+	Run this command:
+
+	   CMD: gradlew.bat clean
+
+	This removes any previously compiled files and ensures a fresh build.
+
+
+
+
+-----------------------------------------------------------
+🏗️ STEP 3: BUILD THE JAR FILE
+-----------------------------------------------------------
+	Run this command:
+
+	   CMD: gradlew.bat bootJar
+
+	OR (both do same if you want a full build)
+	   
+	   CMD: gradlew.bat clean build
+
+
+
+
+
+-----------------------------------------------------------
+🧱 STEP 4: VERIFY BUILD SUCCESS
+-----------------------------------------------------------
+	After a successful build, you will see a message like:
+
+	   EX: BUILD SUCCESSFUL in 10s
+		   5 actionable tasks: 5 executed
+
+
+
+
+-----------------------------------------------------------
+📁 STEP 5: LOCATE YOUR .JAR FILE
+-----------------------------------------------------------
+	Your JAR file will be automatically generated at:
+
+	Example path:
+	   D:\Sudharshan\SPRING_PRACTICE_PROJECTS\Sample_Spring_Project\build\libs\Sample_Spring_Project-0.0.1-SNAPSHOT.jar
+
+
+
+
+
+-----------------------------------------------------------
+🚀 STEP 6: RUN THE JAR FILE (TEST)
+-----------------------------------------------------------
+	You can test the generated JAR file without Docker by running:
+
+	   CMD: java -jar build/libs/Sample_Spring_Project-0.0.1-SNAPSHOT.jar [BY USING THIS CMD, IT WILL RUN YOU SPRING BOOT PROJECT AT CMD ONLY]
+
+	NOTE : If your application starts successfully, it means the JAR was built correctly.
+
+
+
+
+
+-----------------------------------------------------------
+🧩 STEP 7: COMMON ERRORS & FIXES
+-----------------------------------------------------------
+
+	POSSIBLE MISTAKES -1:
+	------------------
+	❌ ERROR: JAVA_HOME is not set properly
+	✅ FIX:
+	   - Make sure your JAVA_HOME points to valid JDK path.
+	   Example:
+		 setx JAVA_HOME "C:\Program Files\Eclipse Adoptium\jdk-17"
+
+	POSSIBLE MISTAKES - 2:
+	------------------
+	❌ ERROR: gradlew.bat not recognized
+	✅ FIX:
+	   - Ensure you are inside your project folder where gradlew.bat exists.
+
+	POSSBILE MISTAKES - 3:
+	❌ ERROR: Task 'bootJar' not found
+	✅ FIX:
+	   - Check that your build.gradle contains the Spring Boot plugin:
+		 plugins {
+			 id 'org.springframework.boot' version '3.x.x'
+			 id 'io.spring.dependency-management' version '1.1.0'
+			 id 'java'
+		 }
+
+
+
+
+
+-----------------------------------------------------------
+✅ QUICK SUMMARY
+-----------------------------------------------------------
+		Step 1 → Open project folder in CMD  
+		Step 2 → Run: gradlew.bat clean 
+		Step 3 → Run: gradlew.bat bootJar  
+		Step 4 → Find JAR in: build/libs/  
+		Step 5 → Run app: java -jar build/libs/<your-jar>.jar  
+

@@ -5,7 +5,7 @@
 
 1️. CORE SPRING BOOT / CONFIGURATION ANNOTATIONS
 ------------------------------------------------
-	@SpringBootApplication      - Main Spring Boot class
+	@SpringBootApplication      - Main Spring Boot class [@configuration + @componentScan + @EnableAutoConfiguration]
 	@Configuration              - Class as source of bean definitions
 	@Bean                       - Declares a bean inside @Configuration
 	@Primary                    - Marks default bean when multiple exist
@@ -13,9 +13,10 @@
 	@Profile                    - Active beans for specific Spring profile
 	@EnableAutoConfiguration    - Enables Spring Boot auto-configuration
 	@ComponentScan              - Scans for @Component, @Service, etc.
-	@Import                     - Import additional configuration classes
-	@PropertySource             - Loads properties from a file
-	@EnableConfigurationProperties - Binds configuration properties to POJOs
+	@Import                     - Used to import one Spring configuration classes into your another spring configuration class.
+	@PropertySource             - Loads property files (like .properties) into the Spring Environment, so you can use them with @Value or Environment.
+	@EnableConfigurationProperties - Binds configuration properties to POJOs by using @ConfigurationProperties annotation.
+	@ConfigurationProperties    -  Bind group of configurations properties to POJO class.
 
 
 2️. DEPENDENCY INJECTION ANNOTATIONS
@@ -28,6 +29,7 @@
 	@StepScope                  - Bean has step-level scope (Spring Batch)
 	@Value("${property}")       - Injects property values
 	@Required                   - Indicates a required dependency (legacy)
+	@ConditionalOnProperty      - enable or disable a bean/component based on the presence and value of a property
 
 
 
@@ -161,3 +163,17 @@
 	@SafeVarargs                  - Suppress warnings for varargs
 	@Repeatable                   - Allow repeating annotation
 	@Documented                   - Include annotation in Javadoc
+	
+	
+	
+12. GLOBAL EXCEPTION HANDLING
+----------------------------------
+
+	@ControllerAdvice()
+	@RestControllerAdvice() 
+	@ExceptionHandler()
+	@ResponseStatus()
+	@ResponseBody()
+	@Order()
+	
+	

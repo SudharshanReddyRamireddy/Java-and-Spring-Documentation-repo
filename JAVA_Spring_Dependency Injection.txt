@@ -1,0 +1,253 @@
+
+==================================================================================================================================
+										Dependency Injection (DI) in Spring — Full Guide (Extended)
+=========================================== **************************************************====================================
+
+1. What is Dependency Injection (DI)?
+------------------------------------
+Dependency Injection (DI) is a design pattern used to reduce tight coupling between classes.
+Instead of a class creating its own dependencies, the Spring container provides the required objects.
+
+	- Dependency: Any object a class needs to function.
+	- Injection: Supplying the dependency from outside.
+
+Use:
+	- Loose coupling → Classes don’t create their own dependencies.
+	- Easier testing → Dependencies can be mocked.
+	- Maintainable & flexible → Change implementations without changing the class using them.
+
+
+
+------------------------------------------------
+2. Example: Tight Coupling vs DI
+--------------------------------
+Tight Coupling:
+
+	class Engine { void start() { System.out.println("Engine started"); } }
+	
+	class Car { private Engine engine = new Engine(); void drive() { engine.start(); } }
+
+	Loose Coupling with DI:
+	class Car {
+		private Engine engine;
+		public Car(Engine engine) { this.engine = engine; }
+		void drive() { engine.start(); }
+	}
+
+
+
+------------------------------------------------
+3. Which classes can use DI in Spring?
+--------------------------------------
+	-> Only Spring-managed beans can use DI:
+
+	Layer / Type         | Annotation                  | Description
+	-------------------- | --------------------------- | ----------------------
+	General-purpose bean  | @Component                  | Any reusable bean
+	Service Layer         | @Service                    | Business logic
+	Repository / DAO      | @Repository                 | Data access layer
+	Web Controller        | @Controller / @RestController | Handles HTTP requests
+	Configuration / Bean  | @Configuration + @Bean      | Custom bean creation
+	
+	
+	NOTE : Only above annotatins classes are consider as spring managed beans
+
+
+
+
+
+------------------------------------------------
+4. How Spring injects dependencies
+---------------------------------
+	A. Constructor Injection
+		@Component
+		class Car { private final Engine engine; 
+			@Autowired public Car(Engine engine) { this.engine = engine; } 
+			void drive() { engine.start(); } 
+		}
+
+	B. Setter Injection
+		@Component
+		class Car { private Engine engine; 
+			@Autowired public void setEngine(Engine engine) { this.engine = engine; } 
+			void drive() { engine.start(); } 
+		}
+
+	C. Field Injection (Not Recommended)
+		@Component
+		class Car { @Autowired private Engine engine; void drive() { engine.start(); } }
+
+
+
+-----------------------------------
+D. @Bean + @Configuration (Detailed)
+------------------------------------
+- Use @Configuration to define a class that provides beans manually.
+- @Bean methods return objects managed by Spring.
+- Useful for classes that cannot be annotated with @Component/@Service.
+
+Example:
+
+	@Configuration
+	class AppConfig {
+		@Bean
+		public Engine engine() { return new Engine(); }
+
+		@Bean
+		public Car car() { return new Car(engine()); }
+	}
+
+	Notes:
+	- Spring calls engine() first, then car(), and injects Engine into Car.
+	- Allows **full control** of bean creation and initialization.
+
+	Advanced @Bean features:
+	- `@Primary` → Marks a bean as primary when multiple beans of same type exist.
+	- `@DependsOn` → Specifies that one bean depends on another.
+	- Bean method parameters → Spring automatically injects other beans:
+		@Bean
+		public Car car(Engine engine) { return new Car(engine); }
+
+
+
+
+
+
+------------------------------------------------
+5. Spring Boot vs Spring MVC DI Differences
+------------------------------------------
+	Feature                 | Spring MVC             | Spring Boot
+	------------------------|----------------------|----------------------
+	Bean Registration       | Must configure XML/Java | Auto-configuration + scanning
+	Application Context     | WebApplicationContext   | Automatically created
+	Auto-wiring             | @Autowired works       | Works out-of-the-box
+	Starter Features        | Manual configuration   | Auto-configures DataSource, MVC, Security
+
+
+
+
+
+------------------------------------------------
+6. DI with Multiple Beans of Same Type
+--------------------------------------
+Problem:
+	- Two or more beans of **same type** exist in different packages.
+	- Spring does not know which bean to inject → `NoUniqueBeanDefinitionException`.
+
+Solutions:
+
+	A. Using @Qualifier
+	------------------
+	@Component("engineV6")
+	class EngineV6 { ... }
+
+	@Component("engineV8")
+	class EngineV8 { ... }
+
+	@Service
+	class CarService {
+		private final Engine engine;
+
+		@Autowired
+		public CarService(@Qualifier("engineV8") Engine engine) {
+			this.engine = engine;
+		}
+	}
+
+- `@Qualifier("beanName")` tells Spring **which bean to inject**.
+
+
+
+
+
+
+
+
+-------------------
+B. Using @Primary
+-----------------
+	@Component
+	@Primary
+	class EngineV8 implements EngineInterface { ... }
+
+	@Component
+	class EngineV6 implements EngineInterface { ... }
+
+	@Autowired
+	private EngineInterface engine; // Injects EngineV8 automatically because of @Primary
+
+
+
+
+
+-----------------------------------
+C. Using @Resource (javax.annotation)
+-------------------------------------
+	- @Resource injects bean **by name first**, then by type.
+	- Can be used instead of @Autowired + @Qualifier.
+
+	@Resource(name="engineV6")
+	private Engine engine; // Injects bean named "engineV6"
+
+	Notes:
+	- @Autowired → default by type, use @Qualifier if multiple beans.
+	- @Resource → default by name, falls back to type if name not found.
+	- Best practice: Prefer @Autowired + @Qualifier in Spring applications.
+
+
+
+
+
+------------------------------------------------
+7. How DI works in a typical Spring App
+--------------------------------------
+		@Repository
+		class EngineRepository { 
+			public String getEngineType() { return "V8 Engine"; } 
+		}
+
+		@Service
+		class EngineService {
+			private final EngineRepository engineRepo;
+			@Autowired
+			public EngineService(EngineRepository engineRepo) { this.engineRepo = engineRepo; }
+			public void printEngine() { System.out.println(engineRepo.getEngineType()); }
+		}
+
+		@RestController
+		class CarController {
+			private final EngineService engineService;
+			@Autowired
+			public CarController(EngineService engineService) { this.engineService = engineService; }
+			@GetMapping("/engine")
+			public String getEngine() { engineService.printEngine(); return "Check console"; }
+		}
+
+	* Flow: CarController → EngineService → EngineRepository
+	* All dependencies injected automatically by Spring container.
+
+
+
+
+
+------------------------------------------------
+8. Summary Table of DI Types
+----------------------------
+		DI Type               | When to Use           | Advantages               | Disadvantages
+		--------------------  | -------------------   | ------------------------ | ---------------------
+		Constructor           | Mandatory dependencies| Immutable, easy to test  | Cannot change dependency later
+		Setter                | Optional dependencies | Flexible                 | Mutable, NPE possible
+		Field                 | Quick prototyping     | Concise                  | Hard to test, breaks encapsulation
+		@Bean + @Configuration| Custom bean creation  | Full control             | Verbose
+
+------------------------------------------------
+		Best Practices:
+		1. Use Constructor Injection for mandatory dependencies.
+		2. Use Setter Injection for optional dependencies.
+		3. Avoid Field Injection in production.
+		4. Only inject Spring-managed beans.
+		5. Use @Qualifier or @Primary when multiple beans of same type exist.
+		6. Prefer @Autowired + @Qualifier over @Resource in Spring.
+		7. @Bean + @Configuration is best for custom or external classes.
+
+
