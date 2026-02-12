@@ -1,0 +1,91 @@
+
+
+	GIT STASH HANDLING AT GITHUB
+	----------------------------
+	
+	* This Document Help on How Handle Stash while Switching btw branch in github.
+
+	EXAMPLE 1:
+			- 	YOU HAVE A GITHUB REPO WITH 4 BRANCHES THAT (Main, B1,B2,B3),CURRENTLY YOU ARE IN BRANCH B1 WITH SOME UNCOMMIT CHANGES, LIKE NOT YET DONE THIS "add.. & commit", SO THIS CHANGES
+				WERE IN YOUR LOCAL NOT SAVED AT REMOTE, SO WHILE THIS TIME, IF YOU WANT TO SWITCH FROM ONE BRANCH TO ANOTHER BRANCH LIKE FROM B1 TO B2, THIS CHANGES MAY COMES INTO B2 AS WELL, 
+				BUT I DON'T WANT THIS CHANGES IN B2 BRANCH, SO THEN THIS CASE YOU SHOULD FOLLOW BELOW THING BY USING STASH
+				
+				
+				
+
+			STEP-1 : CHECK YOUR CHANGES IN CURRENT BRANCH :
+			-----------------------------------------------
+			
+				- "git status" : get all changes which are uncommit
+				
+			
+
+			STEP-2 : SAVE CURRENT BRANCH CHANGES WHICH ARE UNCOMMITED BY USING "stash" :
+			----------------------------------------------------------------------------
+			
+				- "git stash push -m "GIVE ANY NAME FOR THAT CHANGES"
+
+
+
+			STEP-3 : SWITCH TO ANY ANOTHER BRANCH WITHOUT CARRYING THIS BRANCH CHAGES TO SWITCHING BRANCH :
+			-----------------------------------------------------------------------------------------------
+			
+				- "git switch B2"
+				
+
+
+			STEP-4 : COME BACK TO BRANCH B1 :
+			---------------------------------
+			
+				- 'git switch B2"
+				
+			STEP-5 : NOW YOU WANT OLD CHANGES WHICH ARE UNCOMMITED, SO CHECK FIRST LIST OF STASHS : 
+			----------------------------------------------------------------------------------------
+			
+				- 'git stash list" // it will shows all undeleted stash list which you made in past
+				
+
+			STEP-6 : GET INTO ONE OF STASH TO YOUR BRANCH :
+			-----------------------------------------------
+			
+				- "git stash apply stash@{1}   // "stash@{1}" is stash name which existing in stash list
+				
+			
+			
+
+	-------------------------------
+	USE OF STASH RELATED COMMANDS : 
+	-------------------------------
+	
+		* "git stash push -m "give stash name here"  	: CREATION OF STASH WITH SPECIFIED NAME 
+		
+		* "git stash -u" 							 	: SAVES UN-TRACKED FILES ALSO
+		
+		* "git stash push -u -m "your message"	     	: SAVES UN-TRACKED FILES ALSO WITH STASH NAME 
+		
+		* "git stash list"  					     	: SHOWS ALL THE STASHES CREATED IN THE REPOSITORY
+		
+		* "git stash show stash@{0}"                 	: SHOWS SUMMARY OF CHANGES INSIDE THE STASH
+		
+		* "git apply"								 	: APPLIES ALL STASH TO BRANCH AND NOT DELETE AT STASH, ALL STASH EXIST
+
+		* "git stash apply stash@{0}"			     	: APPLIES STASH BUT DOES NOT DELETE IT
+		
+		* "git pop" 								 	: APPLIES ALL STASHS TO BRANCH AND DELETE ALL STASHS
+
+		* "git pop stash@{0}						 	: APPLIES SPECIFIC STASH TO BRANCH AND IT WILL
+		
+		* "git stash drop stash@{0}"			     	: DELETES A PARTICULAR STASH
+		
+		* "git stash clear"						     	: REMOVES ALL STASHES PERMANENTLY
+
+		* "git stash branch branch-name stash@{0}"    	: CREATES NEW BRANCH + APPLIES STASH + DELETES STASH
+		
+		* "git stash push file1 file2"				    : STASHES ONLY SELECTED FILES
+
+
+
+********** THANK YOU **********
+
+
+		
