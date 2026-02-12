@@ -56,29 +56,66 @@ Tight Coupling:
 
 
 
-------------------------------------------------
+--------------------------------------
 4. How Spring injects dependencies
----------------------------------
+--------------------------------------
+
+	@Component
+	class Engine{
+		
+		// Methods
+	
+	}
+
+
 	A. Constructor Injection
+		
 		@Component
-		class Car { private final Engine engine; 
-			@Autowired public Car(Engine engine) { this.engine = engine; } 
-			void drive() { engine.start(); } 
+		class Car { 
+		
+			private final Engine engine; 
+			
+			@Autowired 
+			public Car(Engine engine) {
+				this.engine = engine; 
+			} 
+			
+			void drive() { 
+				engine.start(); 
+			} 
 		}
 
 	B. Setter Injection
+		
 		@Component
-		class Car { private Engine engine; 
-			@Autowired public void setEngine(Engine engine) { this.engine = engine; } 
+		class Car { 
+			private Engine engine; 
+			
+			@Autowired 
+			public void setEngine(Engine engine) { 
+				this.engine = engine; 
+			} 
+			
 			void drive() { engine.start(); } 
 		}
 
+
+
 	C. Field Injection (Not Recommended)
+		
 		@Component
-		class Car { @Autowired private Engine engine; void drive() { engine.start(); } }
+		class Car { 
+		
+			@Autowired 
+			private Engine engine; 
+			
+			void drive() { 
+				engine.start(); 
+			} 
+		}
 
 
-
+	NOTE : HERE, ABOVE CLASS "Engine" MUST BE A SPRING MANAGED BEAN LIKE THAT CLASS SHOULD BE Annotation Any one of this annotation(component, repository, controller, service), or else it may not able to Inject Seccessfully
 -----------------------------------
 D. @Bean + @Configuration (Detailed)
 ------------------------------------
@@ -139,10 +176,10 @@ Solutions:
 	A. Using @Qualifier
 	------------------
 	@Component("engineV6")
-	class EngineV6 { ... }
+	class Engine { ... }
 
 	@Component("engineV8")
-	class EngineV8 { ... }
+	class Engine { ... }
 
 	@Service
 	class CarService {

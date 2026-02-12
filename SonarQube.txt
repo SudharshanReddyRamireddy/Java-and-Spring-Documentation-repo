@@ -1,0 +1,191 @@
+	
+	--------------------------------------------------------------------------------------------------
+	********************************************* SONARQUBE ******************************************
+	--------------------------------------------------------------------------------------------------
+	
+	-------------
+	"SONARQUBE" : SonarQube is Code Quality and Code Security Tool that automatically scan your project to find bugs, and any bad coding practice before deploying.
+	-------------
+	
+	
+	
+	---------------------
+	"WHY USE SONARQUBE" : We use SonarQube to make sure our code is clean, safe, and good quality before merging or deploying.
+	---------------------
+						-> To catch bugs before Going to Deploy.
+						-> To detect security issues
+						-> To maintain clean and readable code
+						-> To enforce coding standards
+						-> To Calculate Test Coverage
+						-> Enforce Quality Gates in CI/CD
+			
+				NOTE : To fail CI/CD pipeline if code quality is bad, so we refine by sonarQube.
+	
+	
+	
+	--------------------------
+	"WHERE TO USE SONARQUBE" : We use SonarQube anywhere we write code and want to ensure below things:
+	--------------------------
+					✔ Clean
+					✔ Secure
+					✔ Maintainable
+					✔ High quality
+					
+			1. During Development (Developer’s Laptop)
+					* Developers run Sonar locally to check their own code before pushing to GitHub.
+					
+			2. In CI/CD Pipelines (Most Important Use Case) To Enforce Quality Gates in CI/CD : 
+					* SonarQube is used inside:
+					* GitHub Actions
+					* Jenkins
+					* GitLab CI
+					* Azure DevOps
+					* Bitbucket pipelines
+			
+			3. For all Programming Languages
+			
+			
+	-------------
+	"USE CASES" : SONARQUBE will use in :
+	-------------
+					
+				* Where To Improve Code Quality (Clean Code)
+				* Where To catch bugs before Going to Deploy.
+				* Where To detect security issues
+				* Where To Be Calculate Test Coverage
+				
+				
+				
+				
+	----------------
+	"SONARSCANNER" : Sonar Scanner is a tool that scans your project code and sends the results to SonarQube.
+	----------------
+			👉 SonarQube = The place where you SEE the report(Brain)
+			👉 Sonar Scanner = The tool that CREATES the report(Worker)
+				
+	*************************************************************************************************************************************************************
+														STEP TO INTEGRATE WITH SPRING BOOT PROJECT AND GET REPORT
+	*************************************************************************************************************************************************************
+	
+	
+	
+	STEP-1 :  INSTALL & RUN SONARQUBE IN YOUR LOCAL 
+	
+				- Download SonarQube Community Edition(https://www.sonarsource.com/products/sonarqube/downloads/)
+				- EXTRACT ZIP (C:\sonarqube)
+				- GO TO (C:\sonarqube\bin\windows-x86-64\)
+				- RUN "StartSonar.bat"
+				
+			INSTALL SONAR SCANNER ALSO :
+			
+				- Download Sonar Scanner
+					( https://docs.sonarsource.com/sonarqube/latest/analyzing-source-code/scanners/sonarscanner/)
+				- Extract the Downloaded ZIP
+					( C:\sonar-scanner\)
+				- Add Sonar Scanner to ENVERONMENTAL PATH VARABLE AND SAVE.
+					(C:\sonar-scanner\sonar-scanner-5.x.x\bin)
+			
+				- CHECK INSTALLATATION 
+					(sonar-scanner -v)
+	
+	
+	
+	
+	
+	STEP-2 : CHECK SONARQUBE RUNNING OR NOT 
+			
+				- OPEN BROWSER (http://localhost:9000)
+				- IT WILL GIVES A LOGIN PAGE OF SONARQUBE, OR ELSE Sonar WAS NOT RUNNNG SUCCESSFULLY IN YOUR CURRENT LOCAL.
+				- LOGIN WITH "USERNAME : admin & PASSWORD : admin"
+	
+	
+	
+	
+	STEP-3 : Build Your Spring Boot Project
+	
+				- Go to your Spring Boot project folder IN CMD (cd D:\YourProject\MySpringBootProject ) 
+				- RUN " mvn clean install"
+				- This creates required compiled files inside "target/classes" CHECK IT ONCE.
+	
+	
+	
+	
+	STEP-4 : Create Project in SonarQube UI
+				
+				- OPEN "http://localhost:9000"
+				- Click Projects → Create Project → Manually
+				- Enter:
+						Project Key: MySpringBootApp
+						Project Name: My Spring Boot App
+				- Click Generate Token
+				- Copy the token (keep it safe)
+	
+	
+	
+	
+	STEP-5 : Create sonar-project.properties File AT SPRING BOOT PROJECT
+	
+				- Inside your Spring Boot project root folder (where pom.xml exists), create:
+						"sonar-project.properties"
+				- ADD THIS BELOW CONTENT :
+				
+						"sonar.projectKey=MySpringBootApp
+						sonar.projectName=My Spring Boot App
+						sonar.sources=src/main/java
+						sonar.java.binaries=target/classes
+						sonar.host.url=http://localhost:9000
+						sonar.login=<PASTE-YOUR-TOKEN-HERE>"  [ HERE, NEED TO REPLACE WITH YOUR TOKEN THE ONE WHICH GENERATED FROM SONAR UI]
+						
+				- SAVE THE FILE.
+		
+	
+	
+	STEP-6 : RUN SONAR SCANNER AT SPRING BOOT PROJECT PATH
+			
+				- Go to your Spring Boot project folder at cmd : ( cd D:\MySpringProject )
+				- RUN "sonar-scanner"
+				
+				- YOU MAY SEE LIKE BELOW IN 
+						"INFO: ANALYSIS SUCCESSFUL
+						INFO: Dashboard URL: http://localhost:9000/dashboard?id=MySpringBootApp"
+				
+
+				
+	
+	
+	STEP-7 : CHECK STATUS AND REPORT AT SONARQUBE
+	
+				- Go To "http://localhost:9000"
+				- Open Projects (MySpringBootApp)
+				- It will show below details : 
+						* Bugs
+						* Vulnerabilities
+						* Code Smells
+						* Security Hotspots
+						* Duplicated Code
+						* Coverage
+						* Maintainability
+				
+		
+
+
+		
+	********************************************************* BASIC STRUCTURE OF SONAR-PROJECT.PROPERTIES FILE *************************************************
+	
+	SAMPLE BASIC STRUCTURE OF SONAR PROPERTIES FILE 
+	
+			sonar.projectKey=MySpringBootApp
+			sonar.projectName=My Spring Boot Application
+			sonar.projectVersion=1.0
+
+			sonar.sources=src/main/java
+			sonar.tests=src/test/java
+			sonar.java.binaries=target/classes
+
+			sonar.host.url=http://localhost:9000
+			sonar.login=YOUR_TOKEN
+
+
+
+
+		: THIS IS SAMPLE CONTENT
